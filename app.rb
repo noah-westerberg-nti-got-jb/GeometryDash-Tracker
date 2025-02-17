@@ -37,4 +37,18 @@ class App < Sinatra::Base
         status 400
         redirect('/login')
     end
+    set(:isAdmin) do |redirect|
+        condition do
+            unless session[:user] && session[:user][:id] == 1
+                status 403
+                redirect(redirect)
+            end
+        end
+    end
+
+    namespace '/admin', :isAdmin => '/' do
+        get '' do
+            erb(:admin)
+        end
+    end
 end
