@@ -37,6 +37,22 @@ class App < Sinatra::Base
         status 400
         redirect('/login')
     end
+
+    get '/create-account' do
+        erb(:create_account)
+    end
+
+    post '/create-account' do
+        if db.execute('SELECT username FROM users WHERE username = ?', [params[:username]]).first
+            status 400
+            redirect('/create-account')
+        end
+
+        hashed_password = BCrypt::Password.create(params[:password])
+        db.execute('INSERT INTO users (username, password) VALUES (?, ?)', [params[:username], hashed_password])
+        redirect('/login')
+    end
+
     set(:isAdmin) do |redirect|
         condition do
             unless session[:user] && session[:user][:id] == 1
@@ -47,8 +63,20 @@ class App < Sinatra::Base
     end
 
     namespace '/admin', :isAdmin => '/' do
-        get '' do
+        get '' do 
             erb(:admin)
+        end
+
+        get '/view-users' do
+            def format_db_data(data) 
+                output = ""
+                data.each do |item|
+                    output += item.to_s + "<br>"
+                end
+                return output
+            end
+
+            format_db_data(db.execute('SELECT * FROM users'))
         end
     end
 end
