@@ -2,6 +2,8 @@ class App < Sinatra::Base
     configure do
         register Sinatra::Namespace
 
+        set :public_folder, 'public'
+        set :views, 'views'
         enable :sessions
         set :session_secret, SecureRandom.hex(64)
     end
@@ -102,5 +104,9 @@ class App < Sinatra::Base
         get '/view-users' do
             format_db_data(db.execute('SELECT * FROM users'))
         end
+    end
+
+    def display_activity_feed()
+        erb :activity_feed, :layout => false
     end
 end
