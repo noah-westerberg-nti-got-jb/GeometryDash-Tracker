@@ -1,7 +1,9 @@
+<script src="/js/add_css.js?<%=Time.now.to_i%>"></script>
+<script>add_css("/css/home_page.css?<%=Time.now.to_i%>")</script>
+
 <h1>Webbserverprogrammering 1 - Projekt 3 - mall</h1>
-<img src="/img/glhf.png">
 
 
-<div id="activity-feed">
+<div class="activity-feed">
   <%=display_activity_feed()%>
 </div>

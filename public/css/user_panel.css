@@ -1,0 +1,47 @@
+.user-panel {
+    display: grid;
+    grid-template-rows: minmax(50px, 15%) auto;
+}
+
+.user-panel .header {
+    height: 100%;
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
+
+.user-panel .header .profile-picture {
+    height: 100%;
+    
+    overflow: hidden;
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+
+    display: flex;
+    justify-content: center;
+}
+
+.user-panel .header .profile-picture img {
+    height: 100%;
+    min-width: 100%;
+}
+
+.user-panel .header .info {
+    background: grey;
+    
+    display: flex;
+    align-items: center;
+}
+
+.user-panel .content {
+    height: 100%;
+    width: 100%;
+
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    border-radius: 0 0 20px 20px;
+
+    background: lightgray;
+}

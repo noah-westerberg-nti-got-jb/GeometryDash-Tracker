@@ -18,7 +18,11 @@ class App < Sinatra::Base
     end
 
     get '/' do
-        erb(:index)
+        redirect('/home')
+    end
+
+    get '/home' do 
+        erb :index
     end
 
     def display_activity_feed()
