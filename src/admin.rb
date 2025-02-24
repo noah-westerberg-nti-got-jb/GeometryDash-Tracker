@@ -1,3 +1,12 @@
+App.set(:isAdmin) do |redirect|
+    condition do
+        unless session[:user] && session[:user][:id] == 1
+            status 403
+            redirect(redirect)
+        end
+    end
+end
+
 App.namespace '/admin', :isAdmin => '/login' do
   get '' do 
       redirect('/admin/database')
