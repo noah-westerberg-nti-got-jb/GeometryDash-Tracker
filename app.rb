@@ -32,3 +32,4 @@ end
 
 require_relative 'src/admin'
 require_relative 'src/account'
+require_relative 'src/activity_feed'

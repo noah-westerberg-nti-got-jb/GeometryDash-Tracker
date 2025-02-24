@@ -33,3 +33,9 @@ App.namespace '/account' do
       redirect('/login')
   end
 end
+
+App.set(:loggedIn) do |redirect|
+    condition do
+        redirect(redirect) unless session[:user]   
+    end
+end
