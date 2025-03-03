@@ -21,7 +21,8 @@ class Seeder
       			id INTEGER PRIMARY KEY AUTOINCREMENT,
       			username TEXT NOT NULL UNIQUE,
       			password TEXT NOT NULL,
-      			score INTEGER NOT NULL DEFAULT 0)'
+      			score INTEGER NOT NULL DEFAULT 0,
+						created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP)'
       			)
 
     db.execute('CREATE TABLE levels (
@@ -36,7 +37,7 @@ class Seeder
 				title TEXT NOT NULL,
 				contents TEXT,
 				attatchment TEXT,
-				created_at DATETIME NOT NULL,
+				created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 				FOREIGN KEY(user_id) REFERENCES users(id))'
 				)
 
@@ -44,7 +45,7 @@ class Seeder
 				id INTEGER PRIMARY KEY AUTOINCREMENT,
 				follower INTEGER NOT NULL,
 				recipient INTEGER NOT NULL,
-				created_at DATETIME NOT NULL,
+				created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 				FOREIGN KEY(follower) REFERENCES users(id),
 				FOREIGN KEY(recipient) REFERENCES users(id))'
 				)
@@ -56,7 +57,7 @@ class Seeder
 				total_attempts INTEGER NOT NULL,
 				practice_attempts INTEGER,
 				perceived_difficulty INTEGER,
-				created_at DATETIME NOT NULL,
+				created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 				FOREIGN KEY(user_id) REFERENCES users(id),
 				FOREIGN KEY (level_id) REFERENCES levels(ingame_id))'
 				)
