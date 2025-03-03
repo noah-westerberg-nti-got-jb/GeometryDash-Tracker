@@ -1,6 +1,11 @@
 .user-panel {
     display: grid;
     grid-template-rows: minmax(50px, 15%) auto;
+
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    border-radius: 0 0 20px 20px;
 }
 
 .user-panel .header {
@@ -9,6 +14,8 @@
 
     display: grid;
     grid-template-columns: auto 1fr;
+
+    background: grey;
 }
 
 .user-panel .header .profile-picture {
@@ -16,7 +23,9 @@
     
     overflow: hidden;
     border-radius: 50%;
-    aspect-ratio: 1 / 1;
+
+    position: relative;
+    left: -50%;
 
     display: flex;
     justify-content: center;
@@ -27,9 +36,7 @@
     min-width: 100%;
 }
 
-.user-panel .header .info {
-    background: grey;
-    
+.user-panel .header .info {    
     display: flex;
     align-items: center;
 }
@@ -38,9 +45,6 @@
     height: 100%;
     width: 100%;
 
-    border-bottom: 2px solid black;
-    border-left: 2px solid black;
-    border-right: 2px solid black;
     border-radius: 0 0 20px 20px;
 
     background: lightgray;
