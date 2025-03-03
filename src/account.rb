@@ -1,6 +1,6 @@
-App.namespace '/account' do
+App.namespace '/users' do
   get '/login' do
-    erb(:login)
+    erb(:'account/login')
   end
 
   post '/login' do
@@ -19,10 +19,10 @@ App.namespace '/account' do
   end
 
   get '/new' do
-      erb(:create_account)
+      erb(:'account/create_account')
   end
 
-  post '/new' do
+  post '/' do
       if db.execute('SELECT username FROM users WHERE username = ?', [params[:username]]).first
           status 400
           redirect('/create-account')

@@ -17,22 +17,18 @@ class App < Sinatra::Base
         return @db
     end
 
-    def user_panel(user_id, info, content)
+    def display_user_panel(user_id, info, content)
         user = db.execute('SELECT * FROM users WHERE id = ?', [user_id]).first
-        erb :user_panel, :locals => {:user => user, :info => info, :content => content}
-    end
-
-    get '/' do
-        redirect('/home')
-    end
-
-    get '/home' do 
-        erb :index
+        erb :'utils/user_panel', :locals => {:user => user, :info => info, :content => content}
     end
 
     def display_activity_feed()
-        erb :activity_feed, :layout => false
+        erb :'utils/activity_feed', :layout => false
     end
+
+    get '/' do
+        erb :index
+    end 
 end
 
 require_relative 'src/admin'

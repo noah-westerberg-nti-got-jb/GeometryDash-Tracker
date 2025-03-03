@@ -13,7 +13,7 @@ App.namespace '/admin', :isAdmin => '/login' do
   end
 
   get '/database' do
-      erb(:database)
+      erb(:'admin/database')
   end
 
   def format_db_data(data) 
