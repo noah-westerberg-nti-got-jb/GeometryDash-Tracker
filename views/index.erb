@@ -4,6 +4,9 @@
 <h1>Webbserverprogrammering 1 - Projekt 3 - mall</h1>
 
 
-<div class="activity-feed">
-  <%=display_activity_feed()%>
-</div>
+<%if session[:user]%>
+ <div class="activity-feed">
+    <%ids = db.execute('SELECT recipient FROM follow_list WHERE follower = ?', [session[:user][:id]]).map { |item| item['recipient'] }%>
+    <%=display_activity_feed(ids)%>
+  </div>
+<%end%>
