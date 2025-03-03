@@ -1,6 +1,7 @@
 App.namespace '/users' do
   get '/login' do
-    erb(:'account/login')
+    @hide_header = true
+    erb :'account/login'
   end
 
   post '/login' do
@@ -10,6 +11,8 @@ App.namespace '/users' do
           hashed_password = BCrypt::Password.new(user['password'])
           if hashed_password == params[:password]
               session[:user] = {:id => user['id'].to_i, :name => user['username']}
+
+              redirect(params['redirect']) if params['redirect']
               redirect('/')
           end
       end
@@ -19,7 +22,8 @@ App.namespace '/users' do
   end
 
   get '/new' do
-      erb(:'account/create_account')
+      @hide_header = true
+      erb :'account/create_account'
   end
 
   post '/' do
@@ -31,6 +35,13 @@ App.namespace '/users' do
       hashed_password = BCrypt::Password.create(params[:password])
       db.execute('INSERT INTO users (username, password) VALUES (?, ?)', [params[:username], hashed_password])
       redirect('/login')
+  end
+
+  get '/logout' do
+      session[:user] = nil
+      
+      redirect(params['redirect']) if params['redirect']
+      redirect('/')
   end
 end
 

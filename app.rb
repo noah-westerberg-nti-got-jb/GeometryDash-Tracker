@@ -29,6 +29,14 @@ class App < Sinatra::Base
         erb :'utils/activity_feed', :layout => false
     end
 
+    def header_hidden? 
+        if @hide_header
+            @hide_header = false
+            return true
+        end
+        return false
+    end
+
     get '/' do
         erb :index
     end 

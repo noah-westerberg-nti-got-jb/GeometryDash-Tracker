@@ -7,13 +7,14 @@ App.set(:isAdmin) do |redirect|
     end
 end
 
-App.namespace '/admin', :isAdmin => '/login' do
+App.namespace '/admin', :isAdmin => '/users/login' do
   get '' do 
       redirect('/admin/database')
   end
 
   get '/database' do
-      erb(:'admin/database')
+    @hide_header = true
+    erb :'admin/database'
   end
 
   def format_db_data(data) 
@@ -45,6 +46,7 @@ App.namespace '/admin', :isAdmin => '/login' do
   end
   
   get '/view-users' do
-      format_db_data(db.execute('SELECT * FROM users'))
+    @hide_header = true
+    format_db_data(db.execute('SELECT * FROM users'))
   end
 end
