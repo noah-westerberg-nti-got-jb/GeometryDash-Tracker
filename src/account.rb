@@ -43,6 +43,11 @@ App.namespace '/users' do
       redirect(params['redirect']) if params['redirect']
       redirect('/')
   end
+
+  get '/:id' do |id|
+    user = db.execute('SELECT * FROM users WHERE id = ?', [id]).first
+    completions = db.execute('SELECT * FROM completions WHERE user_id = ?', [id])
+  end
 end
 
 App.set(:loggedIn) do |redirect|
