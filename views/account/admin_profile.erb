@@ -3,7 +3,7 @@
                 "/css/profile.css?<%=Time.now.to_i%>")</script>
 
 <div id="user-display">
-<%=display_user_panel(user['id'], "##{user['id']} <button id=\"edit-profile\">Edit</button>", "completions: #{completions.length}<br><br>score: #{user['score']}<br><br>...")%>
+<%=display_user_panel(user['id'], "##{user['id']} <button type=\"button\" id=\"edit-profile\">Edit</button>", "completions: #{completions.length}<br><br>score: #{user['score']}<br><br>...")%>
 </div>
 
 <div id="user-feed">
