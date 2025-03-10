@@ -31,7 +31,7 @@ class Seeder
 				)
 				# TODO: Add more relevant information
 
-	db.execute('CREATE TABLE activity_feed (
+	db.execute('CREATE TABLE activities (
 				id INTEGER PRIMARY KEY AUTOINCREMENT,
 				user_id INTEGER NOT NULL,
 				title TEXT NOT NULL,

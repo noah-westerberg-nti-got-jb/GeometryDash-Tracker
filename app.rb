@@ -22,13 +22,6 @@ class App < Sinatra::Base
         erb :'utils/user_panel', :locals => {:user => user, :info => info, :content => content}
     end
 
-    def display_activity_feed(ids)
-        if !ids.empty?
-            @activities = db.execute('SELECT * FROM activities WHERE id IN (?)', [ids])
-        end
-        erb :'utils/activity_feed', :layout => false
-    end
-
     def header_hidden? 
         if @hide_header
             @hide_header = false

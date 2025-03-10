@@ -47,6 +47,7 @@ App.namespace '/users' do
   get '/:id' do |id|
     user = db.execute('SELECT * FROM users WHERE id = ?', [id]).first
     completions = db.execute('SELECT * FROM completions WHERE user_id = ?', [id])
+    erb :'account/profile', :locals => {:user => user, :completions => completions}
   end
 end
 

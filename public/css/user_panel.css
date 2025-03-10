@@ -1,11 +1,14 @@
 .user-panel {
     display: grid;
-    grid-template-rows: minmax(50px, 15%) auto;
+    grid-template-rows: minmax(50px, 15%) 1fr;
 
     border-bottom: 2px solid black;
     border-left: 2px solid black;
     border-right: 2px solid black;
     border-radius: 0 0 20px 20px;
+
+    height: 100%;
+    width: 100%;
 }
 
 .user-panel .header {
