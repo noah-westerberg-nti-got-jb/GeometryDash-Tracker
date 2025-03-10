@@ -18,7 +18,7 @@ App.namespace '/users' do
       end
 
       status 400
-      redirect('/login')
+      redirect('/users/login')
   end
 
   get '/new' do
@@ -44,9 +44,16 @@ App.namespace '/users' do
       redirect('/')
   end
 
+
   get '/:id' do |id|
     user = db.execute('SELECT * FROM users WHERE id = ?', [id]).first
     completions = db.execute('SELECT * FROM completions WHERE user_id = ?', [id])
+    
+    if session[:user]
+        if session[:user][:id] == 1 || session[:user][:id] == id
+          return erb :'account/admin_profile', :locals => {:user => user, :completions => completions}
+        end
+    end
     erb :'account/profile', :locals => {:user => user, :completions => completions}
   end
 end
