@@ -19,6 +19,6 @@ class App
     if !ids.empty?
         @activities = db.execute('SELECT * FROM activities WHERE id IN (?)', [ids])
     end
-    erb :'utils/activity_feed', :layout => false
+    erb :'activity_feed/index', :layout => false
   end
 end

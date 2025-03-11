@@ -55,7 +55,7 @@ App.namespace '/users' do
     
     if session[:user]
         if session[:user][:id] == 1 || session[:user][:id] == id
-          return erb :'account/admin_profile', :locals => {:user => user, :completions => completions}
+          return erb :'account/profile_admin', :locals => {:user => user, :completions => completions}
         end
     end
     erb :'account/profile', :locals => {:user => user, :completions => completions}

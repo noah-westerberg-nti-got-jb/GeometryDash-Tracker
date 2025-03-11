@@ -17,11 +17,6 @@ class App < Sinatra::Base
         return @db
     end
 
-    def display_user_panel(user_id, info, content)
-        user = db.execute('SELECT * FROM users WHERE id = ?', [user_id]).first
-        erb :'utils/user_panel', :locals => {:user => user, :info => info, :content => content}
-    end
-
     def header_hidden? 
         if @hide_header
             @hide_header = false
@@ -38,3 +33,4 @@ end
 require_relative 'src/admin'
 require_relative 'src/account'
 require_relative 'src/activity_feed'
+require_relative 'src/user_panel'
