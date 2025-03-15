@@ -3,9 +3,25 @@
     <form action="/users/login" method="post">
         <input type="text" name="username" placeholder="Username" required>
         <input type="password" name="password" placeholder="Password" required>
-        <input type="submit" value="Login">
+        <input type="submit" value="Login" disabled><span id="timer"></span>
     </form>
     <%if status == 400%>
         <p>Username or Password is Incorrect</p>
     <%end%>
 </div>
+
+<script>
+    let countdown = Math.pow(2, <%=session[:login_attempts]%>);
+    function retry_timer() {
+        if (--countdown <= 0) {
+            document.querySelector("input[type=submit]").disabled = false;
+            document.getElementById("timer").style.display = "none";
+            return;
+        }
+
+        document.getElementById("timer").innerText = `${countdown}s`
+
+        setTimeout(retry_timer, 1000);
+    }
+    retry_timer();
+</script>

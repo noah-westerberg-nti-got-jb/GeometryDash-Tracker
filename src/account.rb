@@ -1,5 +1,7 @@
 App.namespace '/users' do
   get '/login' do
+    session[:login_attempts] = 0 if !session[:login_attempts]
+
     @hide_header = true
     erb :'account/login'
   end
@@ -16,6 +18,8 @@ App.namespace '/users' do
               redirect('/')
           end
       end
+
+      session[:login_attempts] += 1
 
       status 400
       redirect('/users/login')
