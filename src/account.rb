@@ -13,6 +13,7 @@ App.namespace '/users' do
           hashed_password = BCrypt::Password.new(user['password'])
           if hashed_password == params[:password]
               session[:user] = {:id => user['id'].to_i, :name => user['username']}
+              session[:login_attempts] = 0
 
               redirect(params['redirect']) if params['redirect']
               redirect('/')
@@ -33,12 +34,12 @@ App.namespace '/users' do
   post '/' do
       if db.execute('SELECT username FROM users WHERE username = ?', [params[:username]]).first
           status 400
-          redirect('/create-account')
+          redirect('/users/new')
       end
 
       hashed_password = BCrypt::Password.create(params[:password])
       db.execute('INSERT INTO users (username, password) VALUES (?, ?)', [params[:username], hashed_password])
-      redirect('/login')
+      redirect('/users/login')
   end
 
   get '/logout' do
@@ -54,7 +55,7 @@ App.namespace '/users' do
     completions = db.execute('SELECT * FROM completions WHERE user_id = ?', [id])
     
     if session[:user]
-        if session[:user][:id] == 1 || session[:user][:id] == id
+        if session[:user][:id] == 1 || session[:user][:id] == id.to_i
           return erb :'account/profile_admin', :locals => {:user => user, :completions => completions}
         end
     end

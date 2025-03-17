@@ -1,32 +1,12 @@
 <script>add_css("/css/activity_feed.css?<%=Time.now.to_i%>", "/css/user_panel.css?<%=Time.now.to_i%>")</script>
 
-<%=display_user_panel(1, " 00:00:00...", "completed...")%>
-
-<div class="activity-feed-split"><span>.</span><span>.</span><span>.</span></div>
-
-<div class="user-panel"> 
-    <div class="header">
-        <div class="profile-picture"><img src="/img/glhf.png?<%=Time.now.to_i%>"/></div>
-        <div class="info">
-            <span>USERNAME</span>
-        </div>
-    </div>
-    <div class="content">
-        username has completed ...
-    </div>
-</div>
-
-
-<div class="activity-feed-split"><span>.</span><span>.</span><span>.</span></div>
-
-<div class="user-panel"> 
-    <div class="header">
-        <div class="profile-picture"><img src="/img/glhf.png?<%=Time.now.to_i%>"/></div>
-        <div class="info">
-            <span>USERNAME</span>
-        </div>
-    </div>
-    <div class="content">
-        username has completed ...
-    </div>
-</div>
+<%if @activities%>
+    <%@activities.each do |activity| %>
+        <%=display_user_panel(activity['user_id'], activity['time'], activity['content'])%>
+        <div class="activity-feed-split"><span>.</span><span>.</span><span>.</span></div>
+    <%end%>
+<%elsif session[:user]%>
+    Try adding a <strong><a>completion</a></strong> or start <strong><a>following someone</a></strong> for things to start showing up here
+<%else%>
+    <a href="/users/login">Log in</a>, or <a href="/users/new">create an account</a>, to see your activity feed  
+<%end%>
