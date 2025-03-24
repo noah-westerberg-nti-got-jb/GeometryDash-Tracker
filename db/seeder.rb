@@ -27,7 +27,8 @@ class Seeder
       			)
 
     db.execute('CREATE TABLE levels (
-      			ingame_id INTEGER PRIMARY KEY,
+						id INTEGER PRIMARY KEY AUTOINCREMENT,
+      			ingame_id INTEGER NOT NULL UNIQUE,
 						name TEXT NOT NULL)'
 						)
 						# TODO: Add more relevant information
@@ -65,9 +66,9 @@ class Seeder
 				id INTEGER PRIMARY KEY AUTOINCREMENT,
 				user_id INTEGER NOT NULL,
 				level_id INTEGER NOT NULL,
-				total_attempts INTEGER NOT NULL,
-				practice_attempts INTEGER,
-				perceived_difficulty INTEGER,
+				percentage REAL NOT NULL,
+				attempts INTEGER NOT NULL,
+				perceived_difficulty INTEGER DEFAULT 0,
 				created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 				FOREIGN KEY(user_id) REFERENCES users(id),
 				FOREIGN KEY (level_id) REFERENCES levels(ingame_id))'

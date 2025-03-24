@@ -1,3 +1,5 @@
+require_relative 'models/Completions'
+
 class App < Sinatra::Base
     configure do
         register Sinatra::Namespace
@@ -34,3 +36,4 @@ require_relative 'src/admin'
 require_relative 'src/account'
 require_relative 'src/activity_feed'
 require_relative 'src/user_panel'
+require_relative 'src/levels'
