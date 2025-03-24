@@ -52,7 +52,7 @@ App.namespace '/users' do
 
   get '/:id' do |id|
     user = db.execute('SELECT * FROM users WHERE id = ?', [id]).first
-    completions = db.execute('SELECT * FROM completions WHERE user_id = ?', [id])
+    completions = Completions.completions_by_user(id)
     
     if session[:user]
         if session[:user][:id] == 1 || session[:user][:id] == id.to_i

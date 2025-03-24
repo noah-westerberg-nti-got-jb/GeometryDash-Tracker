@@ -9,12 +9,12 @@ class Seeder
   end
 
   def self.drop_tables
-	db.execute('DROP TABLE IF EXISTS users')
-	db.execute('DROP TABLE IF EXISTS levels')
-	db.execute('DROP TABLE IF EXISTS activity_attatchments')
-	db.execute('DROP TABLE IF EXISTS activities')
-	db.execute('DROP TABLE IF EXISTS follow_list')
-	db.execute('DROP TABLE IF EXISTS completions')
+		db.execute('DROP TABLE IF EXISTS users')
+		db.execute('DROP TABLE IF EXISTS levels')
+		db.execute('DROP TABLE IF EXISTS activity_attatchments')
+		db.execute('DROP TABLE IF EXISTS activities')
+		db.execute('DROP TABLE IF EXISTS follow_list')
+		db.execute('DROP TABLE IF EXISTS completions')
   end
 
   def self.create_tables
@@ -35,11 +35,8 @@ class Seeder
 
 	db.execute('CREATE TABLE activity_attatchments (
 				id INTEGER PRIMARY KEY AUTOINCREMENT,
-				activity_id INTEGER NOT NULL,
 				type TEXT NOT NULL,
-				link TEXT,
-				item_id INTEGER,
-				FOREIGN KEY(activity_id) REFERENCES activities(id))'
+				connection TEXT NOT NULL)'
 				)
 
 	db.execute('CREATE TABLE activities (
