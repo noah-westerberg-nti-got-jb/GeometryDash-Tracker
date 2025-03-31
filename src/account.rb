@@ -1,5 +1,6 @@
 require_relative "../models/Users"
 require_relative "../models/Completions"
+require_relative "../models/Follow_List"
 
 App.set(:loggedIn) do |redirect|
     condition do
@@ -63,11 +64,13 @@ App.namespace '/users' do
   get '/:id' do |id|
     user = Users.user_by_id(id)
     completions = Completions.completions_by_user(id)
+    follower_count = FollowList.get_follower_count(id)
+    following_count = FollowList.get_following_count(id)
 
     if session[:user] && session[:user][:id] == id.to_i
-      erb :'account/profile_self', :locals => {:user => user, :completions => completions}
+      erb :'account/profile_self', :locals => {:user => user, :completions => completions, :follower_count => follower_count, :following_count => following_count}
     else
-      erb :'account/profile', :locals => {:user => user, :completions => completions}
+      erb :'account/profile', :locals => {:user => user, :completions => completions, :follower_count => follower_count, :following_count => following_count}
     end
   end
 
@@ -90,5 +93,16 @@ App.namespace '/users' do
     redirect('/') unless session[:user][:id] == id.to_i
     user = Users.user_by_id(id)
     erb :'account/edit', :locals => {:user => user}
+  end
+
+  post '/:id/follow', :loggedIn => "/" do |id|
+    FollowList.follow(session[:user][:id], id)
+    # TODO: Add message if it fails
+    redirect("/users/#{id}")
+  end
+
+  post '/:id/unfollow', :loggedIn => "/" do |id|
+    FollowList.unfollow(session[:user][:id], id)
+    redirect("/users/#{id}")
   end
 end
