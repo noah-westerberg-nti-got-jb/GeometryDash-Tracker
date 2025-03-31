@@ -1,9 +1,11 @@
 App.set(:isAdmin) do |redirect|
     condition do
-        unless session[:user] && session[:user][:id] == 1
-            status 403
-            redirect(redirect)
+        if session[:user]
+            return session[:user][:id] == 1
         end
+        status 403
+        redirect(redirect) if redirect
+        return false
     end
 end
 

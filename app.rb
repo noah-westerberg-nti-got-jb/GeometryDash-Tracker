@@ -1,4 +1,5 @@
 require_relative 'models/Completions'
+require_relative 'models/Users'
 
 class App < Sinatra::Base
     configure do

@@ -1,5 +1,5 @@
 class ActivityFeed
-  def db
+  def self.db
     return @db if @db
     
     @db = SQLite3::Database.new("db/GDTracker.sqlite")
@@ -8,11 +8,11 @@ class ActivityFeed
     return @db
   end
 
-  def new_attatchment(activity_id, type, link, item_id)
+  def self.new_attatchment(activity_id, type, link, item_id)
     
   end
 
-  def new_activity(user_id, title, text, attatchment_id, created_at)
+  def self.new_activity(user_id, title, text, attatchment_id, created_at)
     
   end
 end
