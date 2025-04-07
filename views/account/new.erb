@@ -4,6 +4,7 @@
         <input type="text" name="username" placeholder="Username" required>
         <input type="password" name="password" placeholder="Password" required>
         <input type="submit" value="Create Account">
+        <input type="hidden" name="redirect" value="<%=redirect%>">
     </form>
     <%if status == 400%>
         <p>User already exists</p>

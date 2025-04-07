@@ -17,10 +17,13 @@ App.namespace '/users' do
   get '/login' do
     session[:login_attempts] = 0 if !session[:login_attempts]
 
-    @hide_header = true
-    erb :'account/login'
-  end
+    redirect = nil
+    redirect = params['redirect'] if params['redirect']
 
+    @hide_header = true
+    erb :'account/login', :locals => {:redirect => redirect}
+  end
+  
   post '/login' do
       user = Users.user_by_name(params[:username])
 
@@ -38,12 +41,15 @@ App.namespace '/users' do
       session[:login_attempts] += 1
 
       status 400
+      redirect("/users/login?redirect=#{params['redirect']}") if params['redirect']
       redirect('/users/login')
   end
 
   get '/new' do
+      redirect = nil
+      redirect = params['redirect'] if params['redirect']
       @hide_header = true
-      erb :'account/create_account'
+      erb :'account/new', :locals => {:redirect => redirect}
   end
 
   post '/' do
@@ -51,6 +57,7 @@ App.namespace '/users' do
           status 400
           redirect('/users/new')
       end
+      redirect("/users/login?redirect=#{params['redirect']}") if params['redirect']
       redirect('/users/login')
   end
 
