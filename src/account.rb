@@ -23,7 +23,7 @@ App.namespace '/users' do
     @hide_header = true
     erb :'account/login', :locals => {:redirect => redirect}
   end
-  
+
   post '/login' do
       user = Users.user_by_name(params[:username])
 
@@ -70,6 +70,12 @@ App.namespace '/users' do
 
   get '/:id' do |id|
     user = Users.user_by_id(id)
+    
+    if !user
+      status 404
+      return erb :'account/unkown', :locals => {:id => id}
+    end
+
     completions = Completions.completions_by_user(id)
     follower_count = FollowList.get_follower_count(id)
     following_count = FollowList.get_following_count(id)
