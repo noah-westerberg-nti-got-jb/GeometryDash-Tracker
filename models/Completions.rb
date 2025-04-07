@@ -4,6 +4,7 @@ class Completions
     
     @db = SQLite3::Database.new("db/GDTracker.sqlite")
     @db.results_as_hash = true
+    @db.execute('PRAGMA foreign_keys = ON')
     
     return @db
   end
