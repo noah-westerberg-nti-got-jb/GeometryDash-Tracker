@@ -33,6 +33,11 @@ class App < Sinatra::Base
     get '/' do
         erb :index
     end 
+
+    get '/leaderboard' do
+        users = Users.users_by_score
+        erb :leaderboard, :locals => {:users => users} 
+    end
 end
 
 require_relative 'src/admin'

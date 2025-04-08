@@ -1,9 +1,11 @@
+<script>add_css("/css/user_panel.css?<%=Time.now.to_i%>")</script>
+
 <div class="user-panel"> 
     <div class="header">
         <div class="profile-picture"><img src="/img/glhf.png?<%=Time.now.to_i%>"/></div>
         <div class="info">
-            <span><%=user['username']%>#<%=user['id']%></span>
-            <span><%=info%></span>
+            <span class="username"><%=user['username']%>#<%=user['id']%></span>
+            <span class="info-details"><%=info%></span>
         </div>
     </div>
     <div class="content">

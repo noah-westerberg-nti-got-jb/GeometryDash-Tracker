@@ -61,6 +61,10 @@ App.namespace '/users' do
       redirect('/users/login')
   end
 
+  get '/' do 
+    redirect("/leaderboard")
+  end
+
   get '/logout' do
       session[:user] = nil
       

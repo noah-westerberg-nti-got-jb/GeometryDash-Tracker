@@ -39,4 +39,8 @@ class Users
     db.execute("INSERT INTO users (username, password) VALUES (?, ?)", [username, hashed_password])
     return true
   end
+
+  def self.users_by_score
+      return db.execute("SELECT * FROM users ORDER BY score DESC")
+  end
 end

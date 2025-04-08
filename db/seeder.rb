@@ -40,7 +40,7 @@ class Seeder
 					value TEXT NOT NULL,
 					FOREIGN KEY(activity_id) REFERENCES activities(id) ON DELETE CASCADE)'
 					)
-		
+
 		db.execute('CREATE TABLE activities (
 					id INTEGER PRIMARY KEY AUTOINCREMENT,
 					user_id INTEGER NOT NULL,
@@ -50,7 +50,7 @@ class Seeder
 					created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 					FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE SET NULL)'
 					)
-		
+
 		db.execute('CREATE TABLE follow_list (
 					id INTEGER PRIMARY KEY AUTOINCREMENT,
 					follower INTEGER NOT NULL,
@@ -59,7 +59,7 @@ class Seeder
 					FOREIGN KEY(follower) REFERENCES users(id) ON DELETE CASCADE,
 					FOREIGN KEY(recipient) REFERENCES users(id) ON DELETE CASCADE)'
 					)
-		
+
 		db.execute('CREATE TABLE completions (
 					id INTEGER PRIMARY KEY AUTOINCREMENT,
 					user_id INTEGER NOT NULL,
@@ -71,7 +71,7 @@ class Seeder
 					FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
 					FOREIGN KEY (level_id) REFERENCES levels(ingame_id) ON UPDATE CASCADE ON DELETE CASCADE)'
 					)
-		
+
 		# Create admin user
 		admin_password = BCrypt::Password.create("admin")
 		db.execute('INSERT INTO users (username, password, score) VALUES ("admin", ?, -1)', [admin_password])

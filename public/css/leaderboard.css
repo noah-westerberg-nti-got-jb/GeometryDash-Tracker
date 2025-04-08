@@ -1,0 +1,57 @@
+.user-panel .content {
+    display: none;
+}
+
+#container .user-panel {
+    display: block;
+    height: 50px;
+}
+
+.user-panel .header {
+    border-bottom: 1px solid black;
+}
+
+.user-panel .header, .user-panel .header * {
+    border-radius: 0 0 20px  0;
+}
+
+#container {
+    border: 1px solid #000;
+
+    min-height: 100vh;
+}
+
+#container, #container * {
+    background: lightcyan;
+}
+
+main {
+    padding: 0px 20%;
+}
+
+#container .info {
+    justify-content: space-between;
+}   
+
+#container .info-details {
+    width: 100%;
+}
+
+#container .info-details div {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 0 15px;
+}
+
+.player-info {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-left: 20px;
+}
+
+#self {
+    color: green;
+}
