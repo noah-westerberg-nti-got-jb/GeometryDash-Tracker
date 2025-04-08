@@ -35,17 +35,12 @@ main {
 
 #container .info-details {
     width: 100%;
-}
 
-#container .info-details div {
     display: flex;
     justify-content: space-between;
 
     padding: 0 15px;
-}
 
-.player-info {
-    display: inline-flex;
     justify-content: space-between;
     align-items: center;
 
@@ -54,4 +49,13 @@ main {
 
 #self {
     color: green;
+}
+
+a {
+    text-decoration: none;
+    color: #666;
+}
+
+a:visited {
+    color: #666;
 }

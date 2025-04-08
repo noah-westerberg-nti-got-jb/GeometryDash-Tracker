@@ -5,13 +5,14 @@
 <div id="container">
     <%i = 0%>
     <%while i < users.length%>
+        <a href="users/<%=users[i]['id']%>"
         <%if session[:user] && session[:user][:id] == users[i]['id']%>
-            <div class="player" id="self">
+             class="player" id="self">
         <%else%>
-            <div class="player">
+             class="player">
         <%end%>
-            <%=display_user_panel(users[i]['id'], "<div class='player-info'><span>Score: #{users[i]['score']}</span> <span>| <strong>#{i + 1}</strong></span></div>", "")%>
-        </div>
+            <%=display_user_panel(users[i]['id'], "<span>Score: #{users[i]['score']}</span> <span>| <strong>#{i + 1}</strong></span>", "")%>
+        </a>
         <%i += 1%>
     <%end%>
 </div>
