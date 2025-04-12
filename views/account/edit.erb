@@ -1,0 +1,22 @@
+<h2>Change Settings for <%=user['username']%>#<%=user['id']%></h2>
+
+<p id="error" style="color: red;"></p>
+
+<form action="/users/<%=user['id']%>/edit" method="post">
+
+<p>Username: <input type="text" placeholder="Username..." value="<%=user['username']%>" name="username" required></p>
+
+<button type="submit">Save Changes</button>
+</form>
+
+<form action="/users/<%=user['id']%>/delete" method="post">
+<button type="submit">Delete Account</button>
+</form>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const error = params.get('error');
+    if (error) {
+        document.getElementById('error').innerText = error;
+    }
+</script>

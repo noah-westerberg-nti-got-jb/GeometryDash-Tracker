@@ -1,0 +1,9 @@
+<h2>Add new completion</h2>
+
+<form action="/levels" method="post">
+    <p>Level ID: <input type="number" name="level_id" required></p>
+    <p>Percentage: <input type="number" name="percentage" required></p>
+    <p>Attempts: <input type="number" name="attempts" required></p>
+    <p>Difficulty: <input type="range" value="0" min="-3" max="3" name="perceived_difficulty" required></p>
+    <p><button type="submit">Add</button></p>
+</form>

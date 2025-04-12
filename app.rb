@@ -1,3 +1,7 @@
+require_relative 'models/Completions'
+require_relative 'models/Users'
+require_relative 'models/Follow_List'
+
 class App < Sinatra::Base
     configure do
         register Sinatra::Namespace
@@ -13,13 +17,9 @@ class App < Sinatra::Base
         
         @db = SQLite3::Database.new("db/GDTracker.sqlite")
         @db.results_as_hash = true
+        @db.execute('PRAGMA foreign_keys = ON')
         
         return @db
-    end
-
-    def display_user_panel(user_id, info, content)
-        user = db.execute('SELECT * FROM users WHERE id = ?', [user_id]).first
-        erb :'utils/user_panel', :locals => {:user => user, :info => info, :content => content}
     end
 
     def header_hidden? 
@@ -33,8 +33,15 @@ class App < Sinatra::Base
     get '/' do
         erb :index
     end 
+
+    get '/leaderboard' do
+        users = Users.users_by_score
+        erb :leaderboard, :locals => {:users => users} 
+    end
 end
 
 require_relative 'src/admin'
 require_relative 'src/account'
 require_relative 'src/activity_feed'
+require_relative 'src/user_panel'
+require_relative 'src/levels'

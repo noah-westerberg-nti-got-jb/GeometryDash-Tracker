@@ -1,0 +1,12 @@
+<script>add_css("/css/activity_feed.css?<%=Time.now.to_i%>", "/css/user_panel.css?<%=Time.now.to_i%>")</script>
+
+<%if @activities%>
+    <%@activities.each do |activity| %>
+        <%=display_user_panel(activity['user_id'], activity['time'], activity['content'])%>
+        <div class="activity-feed-split"><span>.</span><span>.</span><span>.</span></div>
+    <%end%>
+<%elsif session[:user]%>
+    Try adding a <strong><a>completion</a></strong> or start <strong><a>following someone</a></strong> for things to start showing up here
+<%else%>
+    <a href="/users/login">Log in</a>, or <a href="/users/new">create an account</a>, to see your activity feed  
+<%end%>

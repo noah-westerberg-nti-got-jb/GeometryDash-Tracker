@@ -4,5 +4,8 @@
  <div class="activity-feed">
     <%ids = db.execute('SELECT recipient FROM follow_list WHERE follower = ?', [session[:user][:id]]).map { |item| item['recipient'] } %>
     <%=display_activity_feed(ids)%>
-  </div>
+<%else%>
+    <a href="/users/login">Log in</a>, or <a href="/users/new">create an account</a>, to see your activity feed  
 <%end%>
+ </div>
+
