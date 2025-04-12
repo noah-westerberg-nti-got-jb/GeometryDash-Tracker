@@ -14,6 +14,8 @@ App.namespace '/users' do
           if hashed_password == params[:password]
               session[:user] = {:id => user['id'].to_i, :name => user['username']}
 
+              session[:login_attempts] = 0
+
               redirect(params['redirect']) if params['redirect']
               redirect('/')
           end
