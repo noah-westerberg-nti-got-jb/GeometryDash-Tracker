@@ -51,11 +51,11 @@ main {
     color: green;
 }
 
-a {
+#container a {
     text-decoration: none;
     color: #666;
 }
 
-a:visited {
+#container a:visited {
     color: #666;
 }

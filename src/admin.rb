@@ -35,6 +35,8 @@ App.namespace '/admin', :isAdmin => '/users/login' do
               output += "<strong>[" + query + "]:</strong><br><br>"
               
               begin
+                    # Jag tycker inte att den här databas användningen behöver flyttas till en separat model-fil 
+                    # eftersom det inte hade förenklat koden eller gjort den mer läsbar.
                   output += format_db_data(db.execute(query))
               rescue SQLite3::SQLException => e
                   output += e.to_s
@@ -49,6 +51,6 @@ App.namespace '/admin', :isAdmin => '/users/login' do
   
   get '/view-users' do
     @hide_header = true
-    format_db_data(db.execute('SELECT * FROM users'))
+    format_db_data(Users.all_users)
   end
 end

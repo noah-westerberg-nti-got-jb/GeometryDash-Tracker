@@ -1,4 +1,4 @@
-class ActivityFeed
+class Levels
   def self.db
     return @db if @db
     
@@ -9,11 +9,8 @@ class ActivityFeed
     return @db
   end
 
-  def self.new_attatchment(activity_id, type, link, item_id)
-    
+  def self.level_by_id(level_id)
+    return db.execute("SELECT * FROM levels WHERE id = ?", level_id).first
   end
 
-  def self.new_activity(user_id, title, text, attatchment_id, created_at)
-    
-  end
 end

@@ -4,7 +4,7 @@ App.namespace "/levels" do
     end
   
   get "/:level_id" do |level_id|
-    level = db.execute("SELECT * FROM levels WHERE id = ?", level_id.to_i).first
+    level = Levels.level_by_id(level_id)
     completions = Completions.completions_of_level(level_id)
     attempts = Completions.level_attempts(level_id)
     erb :"levels/index", :locals => {:level => level, :completions => completions, :attempts => attempts}
