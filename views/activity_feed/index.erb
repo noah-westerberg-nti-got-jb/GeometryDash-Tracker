@@ -1,6 +1,6 @@
 <script>add_css("/css/activity_feed.css?<%=Time.now.to_i%>", "/css/user_panel.css?<%=Time.now.to_i%>")</script>
 
-<%if activities%>
+<%if !activities.empty?%>
     <%activities.each do |activity| %>
         <%=display_user_panel(activity['user_id'], activity['time'], activity['content'])%>
         <div class="activity-feed-split"><span>.</span><span>.</span><span>.</span></div>

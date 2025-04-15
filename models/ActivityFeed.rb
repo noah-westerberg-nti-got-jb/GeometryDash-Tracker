@@ -18,7 +18,7 @@ class ActivityFeed
   end
 
   def self.activities_from_users(user_ids)
-    if !user_ids.empty?
+    unless user_ids
       return
     end
     

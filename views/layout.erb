@@ -9,10 +9,12 @@
 </head>
 <body>
   <%if !header_hidden?%>
-    <header style="display: flex; justify-content: space-between; align-items: center;">
-      <span><a href='/'>GD-Tracker</a></span>
+    <header style="">
+      <nav>
+        <div><a href='/'>GD-Tracker</a></div>
+        <div><a href='/leaderboard'>Leaderboard</a></nav></div>
       <%if session[:user]%>
-        <span><a href='/users/<%=session[:user][:id]%>'><%=session[:user][:name]%>#<%=session[:user][:id]%></a></span>
+        <span id="profile-link"><a href='/users/<%=session[:user][:id]%>'><%=session[:user][:name]%>#<%=session[:user][:id]%></a></span>
         <span><a href='/users/logout?redirect=<%=request.fullpath%>'>Log out</a></span>
       <%else%>
         <span><a href='/users/login?redirect=<%=request.fullpath%>'>Log in</a></span>
