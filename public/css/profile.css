@@ -7,9 +7,11 @@ main {
 }
 
 #user-display {
-    height: 50vh;
+    min-height: 50vh;
     width: 100%;
+    display: grid;
 }
+
 
 #user-feed {
     max-width: 50%;

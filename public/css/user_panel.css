@@ -1,22 +1,26 @@
 .user-panel {
-    display: grid;
-    grid-template-rows: minmax(50px, 15%) auto;
-
-    border-bottom: 2px solid black;
-    border-left: 2px solid black;
-    border-right: 2px solid black;
     border-radius: 0 0 20px 20px;
 
     height: 100%;
     width: 100%;
+    background: lightgray;
+}
+
+.user-panel, .header, .user-panel .content > div {
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    border-radius: 0 0 20px 20px;
 }
 
 .user-panel .header {
-    height: 100%;
+    height: 75px;
     width: 100%;
 
     display: grid;
     grid-template-columns: auto 1fr;
+
+    border-radius: 0 0 20px 0;
 
     background: grey;
 }
@@ -39,16 +43,10 @@
     min-width: 100%;
 }
 
-.user-panel .header .info {    
-    display: flex;
-    align-items: center;
+.content > div {
+    padding: 10px;
 }
 
-.user-panel .content {
-    height: 100%;
-    width: 100%;
-
-    border-radius: 0 0 20px 20px;
-
-    background: lightgray;
+.content > div:last-child {
+    border: none
 }
