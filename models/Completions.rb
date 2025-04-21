@@ -10,11 +10,11 @@ class Completions
   end
 
   def self.completions_of_level(level_id)
-    return db.execute("SELECT COUNT(user_id) FROM completions WHERE level_id = ? AND percentage = 100", level_id.to_i).first['COUNT(user_id)'].to_i
+    return db.execute("SELECT COUNT(user_id) FROM completions WHERE level_id = ? AND percentage >= 100", level_id.to_i).first['COUNT(user_id)'].to_i
   end
 
   def self.completions_by_user(user_id)
-    return db.execute("SELECT DISTINCT COUNT(user_id), level_id FROM completions WHERE user_id = ? AND percentage = 100", [user_id.to_i]).first['COUNT(user_id)'].to_i
+    return db.execute("SELECT DISTINCT COUNT(user_id), level_id FROM completions WHERE user_id = ? AND percentage >= 100", [user_id.to_i]).first['COUNT(user_id)'].to_i
   end
 
   def self.level_attempts(level_id)

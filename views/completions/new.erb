@@ -1,0 +1,21 @@
+<h2>Add new completion</h2>
+
+<form action="/completions" method="post">
+    <p>Level ID: <input id="level_id" type="number" name="level_id" required></p>
+    <p>Percentage: <input id="percentage" type="number" name="percentage" required></p>
+    <p>Attempts: <input id="attempts" type="number" name="attempts" required></p>
+    <p>Difficulty: <input id="perceived_difficulty" type="range" value="0" min="-3" max="3" name="perceived_difficulty" required></p>
+    <p><button type="submit">Add</button></p>
+</form>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('p')) {
+        const p = JSON.parse(params.get('p'));
+
+        document.getElementById('level_id').value = p.level_id;
+        document.getElementById('percentage').value = p.percentage;
+        document.getElementById('attempts').value = p.attempts;
+        document.getElementById('perceived_difficulty').value = p.perceived_difficulty;
+    }
+</script>

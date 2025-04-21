@@ -1,9 +1,39 @@
-<h2>Add new completion</h2>
+<h2>The level you entered does not exist in the database<br>Please enter its details</h2>
 
-<form action="/levels" method="post">
+<form method="post" action="/levels">
     <p>Level ID: <input type="number" name="level_id" required></p>
-    <p>Percentage: <input type="number" name="percentage" required></p>
-    <p>Attempts: <input type="number" name="attempts" required></p>
-    <p>Difficulty: <input type="range" value="0" min="-3" max="3" name="perceived_difficulty" required></p>
+    <p>Name: <input type="text" name="name" required></p>
+    <p>Difficulty: <select name="difficulty">
+                    <option>N/A</option>
+                    <option>Auto</option>
+                    <option>Easy</option>
+                    <option>Normal</option>
+                    <option>Hard</option>
+                    <option>Harder</option>
+                    <option>Insane</option>
+                    <option>Demon</option>
+                    <option>Easy Demon</option>
+                    <option>Medium Demon</option>
+                    <option>Hard Demon</option>
+                    <option>Insane Demon</option>
+                    <option>Extreme Demon</option>
+    </select></p>
+    <p>Length: <select name="length_text" required>
+                    <option>Tiny</option>
+                    <option>Short</option>
+                    <option>Medium</option>
+                    <option>Long</option>
+                    <option>XL</option>
+    </select></p>
+
+    <input id="p" type="hidden" name="p">
+
     <p><button type="submit">Add</button></p>
 </form>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('p')) {
+        document.getElementById("p").value = params.get('p')
+    }
+</script>

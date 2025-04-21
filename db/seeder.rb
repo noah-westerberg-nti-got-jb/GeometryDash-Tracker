@@ -29,9 +29,11 @@ class Seeder
     db.execute('CREATE TABLE levels (
 						id INTEGER PRIMARY KEY AUTOINCREMENT,
       			ingame_id INTEGER NOT NULL UNIQUE,
-						name TEXT NOT NULL)'
+						name TEXT,
+						difficulty TEXT NOT NULL,
+						length_text TEXT NOT NULL,
+						length_seconds INTEGER)'
 						)
-						# TODO: Add more relevant information
 
 		db.execute('CREATE TABLE activity_attachments (
 					id INTEGER PRIMARY KEY AUTOINCREMENT,

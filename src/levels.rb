@@ -1,27 +1,27 @@
 App.namespace "/levels" do 
-    get "/new", :loggedIn => "/" do
-      erb :"levels/new"
-    end
-  
-  get "/:level_id" do |level_id|
-    level = Levels.level_by_id(level_id)
-    completions = Completions.completions_of_level(level_id)
-    attempts = Completions.level_attempts(level_id)
-    erb :"levels/index", :locals => {:level => level, :completions => completions, :attempts => attempts}
+  get '/new', :loggedIn => "/" do
+    erb :"levels/new", :locals => {:p => params[:p]}
   end
 
-  post "", :loggedIn => "/" do
-    user_id = session[:user][:id]
-    level_id = params[:level_id]
-    percentage = params[:percentage].to_f.clamp(0, 100)
-    attempts = params[:attempts].to_i - Completions.level_attempts_by_user(level_id, user_id)
-    perceived_difficulty = params[:perceived_difficulty].to_i
-    created_at = Time.now.to_s
+  post '' do
+    level_id = params['level_id']
+    name = params['name']
+    difficulty = params['difficulty']
+    length_text = params['length_text']
 
-    completion_id = Completions.new_completion(user_id, level_id, percentage, attempts, perceived_difficulty, created_at)
+    Levels.new(level_id, name, difficulty, length_text)
 
-    ActivityFeed.new_activity(user_id, "New Completion", "User has completed a level", "0", created_at)
+    if !params[:p]
+      redirect("/")
+    end
 
-    redirect("/users/#{user_id}")
+    redirect("/completions/new?p=" + params[:p].to_s)
+  end
+
+  get "/:level_id" do |level_id|
+    level = Levels.level_by_id(level_id)
+    completions = Completions.completions_of_level(level['ingame_id'])
+    attempts = Completions.level_attempts(level['ingame_id'])
+    erb :"levels/index", :locals => {:level => level, :completions => completions, :attempts => attempts}
   end
 end

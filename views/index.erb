@@ -1,6 +1,8 @@
 <script>add_css("/css/home_page.css?<%=Time.now.to_i%>")</script>
 
 <%if session[:user]%>
+    <div id="add-completion"><a href='/completions/new'>Add Completion</a></div>
+
  <div class="activity-feed">
     <%ids = FollowList.get_following(session[:user][:id]).map { |item| item['recipient'] } %>
     <%=display_activity_feed(ids)%>

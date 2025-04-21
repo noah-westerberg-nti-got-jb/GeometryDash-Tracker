@@ -1,6 +1,6 @@
 require_relative 'models/Completions'
 require_relative 'models/Users'
-require_relative 'models/Follow_List'
+require_relative 'models/FollowList'
 
 class App < Sinatra::Base
     configure do
@@ -45,3 +45,4 @@ require_relative 'src/account'
 require_relative 'src/activity_feed'
 require_relative 'src/user_panel'
 require_relative 'src/levels'
+require_relative 'src/completions'

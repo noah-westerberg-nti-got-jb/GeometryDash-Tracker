@@ -1,6 +1,6 @@
 require_relative "../models/Users"
 require_relative "../models/Completions"
-require_relative "../models/Follow_List"
+require_relative "../models/FollowList"
 
 App.set(:loggedIn) do |redirect|
     condition do
