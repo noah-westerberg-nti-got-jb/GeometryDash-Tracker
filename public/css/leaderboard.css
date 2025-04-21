@@ -1,20 +1,3 @@
-.user-panel .content {
-    display: none;
-}
-
-#container .user-panel {
-    display: block;
-    height: 50px;
-}
-
-.user-panel .header {
-    border-bottom: 1px solid black;
-}
-
-.user-panel .header, .user-panel .header * {
-    border-radius: 0 0 20px  0;
-}
-
 #container {
     border: 1px solid #000;
 
@@ -31,6 +14,7 @@ main {
 
 #container .info {
     justify-content: space-between;
+    border-radius: 20px;
 }   
 
 #container .info-details {
@@ -39,7 +23,7 @@ main {
     display: flex;
     justify-content: space-between;
 
-    padding: 0 15px;
+    margin: 0 25px;
 
     justify-content: space-between;
     align-items: center;
@@ -47,7 +31,7 @@ main {
     margin-left: 20px;
 }
 
-#self {
+#container #self {
     color: green;
 }
 

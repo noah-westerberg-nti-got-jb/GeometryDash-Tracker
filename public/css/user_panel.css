@@ -15,7 +15,7 @@
 
 .user-panel .header {
     height: 75px;
-    width: 100%;
+    width: auto;
 
     display: grid;
     grid-template-columns: auto 1fr;
@@ -49,4 +49,11 @@
 
 .content > div:last-child {
     border: none
+}
+
+.user-panel .header .info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
 }
