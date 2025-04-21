@@ -1,7 +1,7 @@
 <h2>The level you entered does not exist in the database<br>Please enter its details</h2>
 
 <form method="post" action="/levels">
-    <p>Level ID: <input type="number" name="level_id" required></p>
+    <p>Level ID: <input id="level_id" type="number" name="level_id" required></p>
     <p>Name: <input type="text" name="name" required></p>
     <p>Difficulty: <select name="difficulty">
                     <option>N/A</option>
@@ -35,5 +35,9 @@
     const params = new URLSearchParams(window.location.search);
     if (params.has('p')) {
         document.getElementById("p").value = params.get('p')
+    }
+    
+    if (params.has('l')) {
+        document.getElementById("level_id").value = params.get('l')
     }
 </script>

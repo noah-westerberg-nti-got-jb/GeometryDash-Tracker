@@ -1,5 +1,7 @@
 require_relative '../models/Levels'
 
+require 'json'
+
 App.namespace "/completions" do 
   get "/new", :loggedIn => "/" do
     erb :"completions/new"
@@ -8,11 +10,8 @@ App.namespace "/completions" do
   post "", :loggedIn => "/" do
     level_id = params[:level_id]
 
-    level = Levels.level_by_ingame_id(level_id)
-    p "level: #{level}"
-
-    if !level
-      redirect('/levels/new?p=' + params.to_s)
+    if !Levels.level_by_ingame_id(level_id)
+      redirect("/levels/new?p=#{params.to_json}&l=#{level_id}")
     end
 
     user_id = session[:user][:id]
