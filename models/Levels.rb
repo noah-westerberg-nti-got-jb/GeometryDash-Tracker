@@ -17,6 +17,10 @@ class Levels
     return db.execute("SELECT * FROM levels WHERE ingame_id = ?", [level_id]).first
   end
 
+  def self.level_by_name(name)
+    return db.execute("SELECT * FROM levels WHERE name = ?", [name]).first
+  end
+
   def self.new(level_id, name, difficulty, length_text)
     db.execute("INSERT INTO levels (ingame_id, name, difficulty, length_text) VALUES (?, ?, ?, ?)", [level_id.to_i, name, difficulty, length_text])
     return db.execute("SELECT id from levels WHERE ingame_id = ?", [level_id]).first['id']
