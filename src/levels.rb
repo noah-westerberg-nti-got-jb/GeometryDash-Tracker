@@ -24,4 +24,8 @@ App.namespace "/levels" do
     attempts = Completions.level_attempts(level['ingame_id'])
     erb :"levels/index", :locals => {:level => level, :completions => completions, :attempts => attempts}
   end
+
+  get '' do 
+    erb :"levels/levels", :locals => {:levels => Levels.all}
+  end
 end

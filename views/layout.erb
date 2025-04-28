@@ -12,7 +12,9 @@
     <header>
       <nav>
         <div><a href='/'>GD-Tracker</a></div>
-        <div><a href='/leaderboard'>Leaderboard</a></nav></div>
+        <div><a href='/leaderboard'>Leaderboard</a></div>
+        <div><a href='/levels'>Levels</a></div>
+      </nav></div>
       <%if session[:user]%>
         <span id="profile-link"><a href='/users/<%=session[:user][:id]%>'><%=session[:user][:name]%>#<%=session[:user][:id]%></a></span>
         <span><a href='/users/logout?redirect=<%=request.fullpath%>'>Log out</a></span>

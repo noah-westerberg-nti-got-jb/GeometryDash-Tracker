@@ -22,8 +22,12 @@ App.namespace "/completions" do
 
     completion_id = Completions.new_completion(user_id, level_id, percentage, attempts, perceived_difficulty, created_at)
 
-    ActivityFeed.new_activity(user_id, "New Completion", "User has completed a level", "0", created_at)
+    ActivityFeed.new_activity(user_id, "New Completion", "User has completed a level", completion_id, created_at)
 
     redirect("/users/#{user_id}")
+  end
+
+  get "" do 
+    erb :"completions/index"
   end
 end

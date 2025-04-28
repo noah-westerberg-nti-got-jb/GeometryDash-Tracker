@@ -22,4 +22,8 @@ class Levels
     return db.execute("SELECT id from levels WHERE ingame_id = ?", [level_id]).first['id']
   end
 
+  def self.all
+    return db.execute("SELECT * FROM levels")
+  end
+
 end

@@ -1,0 +1,55 @@
+#container {
+    border: 1px solid #000;
+
+    min-height: 100vh;
+}
+
+#container{
+    background: lightcyan;
+}
+
+#container a {
+    text-decoration: none;
+    color: #666;
+}
+
+#container a:visited {
+    color: #666;
+}
+
+main {
+    padding: 0px 20%;
+}
+
+.level {
+    height: 80px;
+
+    display: grid;
+
+    grid-template-columns: 20% auto;
+
+
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    border-radius: 0 0 20px 0;
+
+    overflow: hidden;
+}
+
+.level:hover {
+    color: #878787;
+}
+
+.level div {
+    display: flex;
+    align-items: center;
+}
+
+.level .info {
+    padding: 0 15px;
+}
+
+.level .info span {
+    margin: 0 15px;
+}

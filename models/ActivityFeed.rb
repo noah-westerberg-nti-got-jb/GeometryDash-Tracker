@@ -17,11 +17,7 @@ class ActivityFeed
     
   end
 
-  def self.activities_from_users(user_ids)
-    unless user_ids
-      return
-    end
-    
+  def self.activities_from_users(user_ids)    
     return db.execute('SELECT * FROM activities WHERE user_id IN (?)', [user_ids])
   end
 
