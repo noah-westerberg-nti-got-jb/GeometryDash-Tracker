@@ -1,9 +1,0 @@
-<script>add_css("/css/profile.css?<%=Time.now.to_i%>")</script>
-
-<div id="user-display">
-    <%=display_user_panel(user['id'], " <form action=\"/users/" + user['id'].to_s + "/edit\" method=\"get\"> <button type=\"submit\">Edit</button></form>", "<div>completions: #{completions}<br><br>score: #{user['score']}<br><br> followers: #{follower_count} <br>following: #{following_count}</div>")%>
-</div>
-
-<div id="user-feed">
-    <%=display_activity_feed([user['id']])%>
-</div>

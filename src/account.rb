@@ -90,11 +90,7 @@ App.namespace '/users' do
     follower_count = FollowList.get_follower_count(id)
     following_count = FollowList.get_following_count(id)
 
-    if session[:user] && session[:user][:id] == id.to_i
-      erb :'account/profile_self', :locals => {:user => user, :completions => completions, :follower_count => follower_count, :following_count => following_count}
-    else
-      erb :'account/profile', :locals => {:user => user, :completions => completions, :follower_count => follower_count, :following_count => following_count}
-    end
+    erb :'account/profile', :locals => {:user => user, :completions => completions, :follower_count => follower_count, :following_count => following_count}
   end
 
   post '/:id/delete', :loggedIn => "/" do |id|
