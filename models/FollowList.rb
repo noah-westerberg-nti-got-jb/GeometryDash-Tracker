@@ -12,11 +12,11 @@ class FollowList
   end
 
   def self.get_following(user_id)
-    return db.execute("SELECT recipient FROM follow_list WHERE follower = ?", user_id.to_i)
+    return db.execute("SELECT users.* FROM follow_list JOIN users ON follow_list.recipient = users.id WHERE follower = ?", user_id.to_i)
   end
 
   def self.get_followers(user_id)
-    db.execute("SELECT follower FROM follow_list WHERE recipient = ?", user_id.to_i)
+    db.execute("SELECT users.* FROM follow_list JOIN users ON follow_list.follower = users.id WHERE recipient = ?", user_id.to_i)
   end
 
   def self.follow(follower_id, recipient_id)

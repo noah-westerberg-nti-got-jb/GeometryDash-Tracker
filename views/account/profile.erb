@@ -10,7 +10,7 @@
         <%end%>
     <%end%>
     
-    <%=display_user_panel(user['id'], follow_button, "completions: #{completions}<br><br>score: #{user['score']}<br><br> followers: #{follower_count} <br>following: #{following_count}")%>
+    <%=display_user_panel(user['id'], follow_button, "completions: #{completions}<br><br>score: #{user['score']}<br><br> <a href=\"/users/#{user['id']}/followers\">followers: #{follower_count}</a> <br><a href=\"/users/#{user['id']}/following\">following: #{following_count}</a>")%>
 </div>
 
 <div id="user-feed">

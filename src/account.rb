@@ -128,4 +128,14 @@ App.namespace '/users' do
     FollowList.unfollow(session[:user][:id], id)
     redirect("/users/#{id}")
   end
+
+  get '/:id/followers' do |id|
+    user = Users.user_by_id(id)
+    erb :"account/follow_list", :locals => {:users => FollowList.get_followers(id), :title => "Users following <em>#{user['username']}##{user['id']}</em>"}
+  end
+
+  get '/:id/following' do |id|
+    user = Users.user_by_id(id)
+    erb :"account/follow_list", :locals => {:users => FollowList.get_following(id), :title => "Users <em>#{user['username']}##{user['id']}</em> is following"}
+  end
 end
