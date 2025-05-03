@@ -134,4 +134,8 @@ App.namespace '/users' do
     user = Users.user_by_id(id)
     erb :"account/follow_list", :locals => {:users => FollowList.get_following(id), :title => "Users <em>#{user['username']}##{user['id']}</em> is following"}
   end
+
+  get '/:id/collections' do |id|
+    erb :"collections/index", :locals => {:collections => Collections.by_user(id)}
+  end
 end

@@ -3,7 +3,7 @@
 <%collection = collection_levels.first%>
 <h2><%=collection['collection_name']%></h2>
 
-<p>Collection by: <%=Users.user_by_id(collection['creator_id'])['username']%>#<%=collection['creator_id']%><p>
+<p>Collection by: <a href="/users/<%=collection['creator_id']%>"><%=Users.user_by_id(collection['creator_id'])['username']%>#<%=collection['creator_id']%></a><p>
 
 <p><%=collection['collection_description']%></p>
 

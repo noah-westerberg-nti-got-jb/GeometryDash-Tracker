@@ -24,4 +24,8 @@ class Collections
   def self.by_id(id)
     return db.execute('SELECT * FROM collections WHERE id = ?', [id.to_i])
   end
+
+  def self.by_user(user_id)
+    return db.execute('SELECT * FROM collections WHERE creator_id = ?', [user_id.to_i])
+  end
 end
