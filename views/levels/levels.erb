@@ -11,7 +11,14 @@
 <div id="container">
     <%levels.each do |level|%>
         <a href="levels/<%=level['id']%>">
-            <div class="level"><div class="name"><%="#{level['name']}##{level['ingame_id']}"%></div> <div class="info"><span>Difficulty: <%=level['difficulty']%></span> <span>Length: <%=level['length_text']%></span> <span>Completions: <%=Completions.completions_of_level(level['ingame_id'])%></span></div></div>
+            <div class="level">
+                <div class="name"><%="#{level['name']}##{level['id']}"%></div> 
+                <div class="info">
+                    <span>Difficulty: <%=level['difficulty']%></span> 
+                    <span>Length: <%=level['length_text']%></span> 
+                    <span>Completions: <%=Completions.completions_of_level(level['id'])%></span>
+                </div>
+            </div>
         </a>
     <%end%>
 </div>

@@ -1,0 +1,23 @@
+<script>add_css("/css/levels.css?<%=Time.now.to_i%>")</script>
+
+<%collection = collection_levels.first%>
+<h2><%=collection['collection_name']%></h2>
+
+<p>Collection by: <%=Users.user_by_id(collection['creator_id'])['username']%>#<%=collection['creator_id']%><p>
+
+<p><%=collection['collection_description']%></p>
+
+<div id="container">
+    <%collection_levels.each do |level|%>
+        <a href="/levels/<%=level['level_id']%>">
+            <div class="level">
+                <div class="name"><%="#{level['level_name']}##{level['level_id']}"%></div> 
+                <div class="info">
+                    <span>Difficulty: <%=level['difficulty']%></span> 
+                    <span>Length: <%=level['length_text']%></span> 
+                    <span>Completions: <%=Completions.completions_of_level(level['level_id'])%></span>
+                </div>
+            </div>
+        </a>
+    <%end%>
+</div>

@@ -20,14 +20,14 @@ App.namespace "/levels" do
 
   get "/:level_id" do |level_id|
     level = Levels.level_by_id(level_id)
-    completions = Completions.completions_of_level(level['ingame_id'])
-    attempts = Completions.level_attempts(level['ingame_id'])
+    completions = Completions.completions_of_level(level['id'])
+    attempts = Completions.level_attempts(level['id'])
     erb :"levels/index", :locals => {:level => level, :completions => completions, :attempts => attempts}
   end
 
   get '' do 
     if params[:search] != ""
-      level_by_id = Levels.level_by_ingame_id(params[:search])
+      level_by_id = Levels.level_by_id(params[:search])
       level_by_name = Levels.level_by_name(params[:search])
       levels = [level_by_id, level_by_name].compact
       p levels

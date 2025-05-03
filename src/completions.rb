@@ -10,7 +10,7 @@ App.namespace "/completions" do
   post "", :loggedIn => "/" do
     level_id = params[:level_id]
 
-    if !Levels.level_by_ingame_id(level_id)
+    if !Levels.level_by_id(level_id)
       redirect("/levels/new?p=#{params.to_json}&l=#{level_id}")
     end
 

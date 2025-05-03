@@ -15,6 +15,9 @@ class Seeder
 		db.execute('DROP TABLE IF EXISTS activities')
 		db.execute('DROP TABLE IF EXISTS follow_list')
 		db.execute('DROP TABLE IF EXISTS completions')
+		db.execute('DROP TABLE IF EXISTS collections')
+		db.execute('DROP TABLE IF EXISTS collection_levels')
+		
   end
 
   def self.create_tables
@@ -27,8 +30,7 @@ class Seeder
       			)
 
     db.execute('CREATE TABLE levels (
-						id INTEGER PRIMARY KEY AUTOINCREMENT,
-      			ingame_id INTEGER NOT NULL UNIQUE,
+      			id INTEGER PRIMARY KEY,
 						name TEXT,
 						difficulty TEXT NOT NULL,
 						length_text TEXT NOT NULL,
@@ -40,7 +42,7 @@ class Seeder
 					activity_id INTEGER NOT NULL,
 					type TEXT NOT NULL,
 					value TEXT NOT NULL,
-					FOREIGN KEY(activity_id) REFERENCES activities(id) ON DELETE CASCADE)'
+					FOREIGN KEY (activity_id) REFERENCES activities(id) ON DELETE CASCADE)'
 					)
 
 		db.execute('CREATE TABLE activities (
@@ -50,7 +52,7 @@ class Seeder
 					text TEXT,
 					attachment_id INTEGER,
 					created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-					FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE SET NULL)'
+					FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL)'
 					)
 
 		db.execute('CREATE TABLE follow_list (
@@ -58,8 +60,8 @@ class Seeder
 					follower INTEGER NOT NULL,
 					recipient INTEGER NOT NULL,
 					created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-					FOREIGN KEY(follower) REFERENCES users(id) ON DELETE CASCADE,
-					FOREIGN KEY(recipient) REFERENCES users(id) ON DELETE CASCADE)'
+					FOREIGN KEY (follower) REFERENCES users(id) ON DELETE CASCADE,
+					FOREIGN KEY (recipient) REFERENCES users(id) ON DELETE CASCADE)'
 					)
 
 		db.execute('CREATE TABLE completions (
@@ -71,8 +73,24 @@ class Seeder
 					perceived_difficulty INTEGER DEFAULT 0,
 					created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 					FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
-					FOREIGN KEY (level_id) REFERENCES levels(ingame_id) ON UPDATE CASCADE ON DELETE CASCADE)'
+					FOREIGN KEY (level_id) REFERENCES levels(id) ON DELETE CASCADE)'
 					)
+
+		db.execute('CREATE TABLE collections (
+					id INTEGER PRIMARY KEY AUTOINCREMENT,
+					creator_id INTEGER NOT NULL,
+					name TEXT NOT NULL,
+					description TEXT,
+					FOREIGN KEY (creator_id) REFERENCES users(id) ON DELETE CASCADE)'
+		)
+
+		db.execute('CREATE TABLE collection_levels (
+					id INTEGER PRIMARY KEY AUTOINCREMENT,
+					collection_id INTEGER NOT NULL,
+					level_id INTEGER NOT NULL,
+					FOREIGN KEY (collection_id) REFERENCES collections(id) ON DELETE CASCADE,
+					FOREIGN KEY (level_id) REFERENCES levels(id) ON DELETE CASCADE)'
+		)
 
 		# Create admin user
 		admin_password = BCrypt::Password.create("admin")
