@@ -100,7 +100,7 @@ App.namespace '/users' do
     redirect('/')
   end
 
-  post '/:id/edit', :loggedIn => "/" do |id|
+  post '/:id/update', :loggedIn => "/" do |id|
     redirect('/') unless session[:user][:id] == id.to_i
     
     redirect("/users/#{id}/edit?error=username is not available") unless Users.change_username(id, params[:username])
@@ -136,6 +136,18 @@ App.namespace '/users' do
   end
 
   get '/:id/collections' do |id|
-    erb :"collections/index", :locals => {:collections => Collections.by_user(id)}
+    erb :"collections/index", :locals => {:collections => Collections.by_user(id), :user_id => id}
+  end
+
+  get '/:id/collections/new', :loggedIn => "/collections" do |id|
+    erb :"collections/new"
+  end
+
+  post '/:id/collections', :loggedIn => "/users/:id/collections" do |id|
+    collection_id = Collections.new(id, params['name'], params['description'])
+    if params['level_id'] != ""
+      Collections.add_level(collection_id, params['level_id'])
+    end
+    redirect("/collections/#{collection_id}")
   end
 end

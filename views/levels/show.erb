@@ -1,5 +1,12 @@
 <h2><%=level['name']%><h2>
 
+<%if session[:user]%>
+    <form action="/users/<%=session[:user][:id]%>/collections" method="get">
+        <input type="hidden" value="<%=level['id']%>" name="level_id">
+        <button type="submit">Add to collection</button>
+    </form>
+<%end%>
+
 <div>id:<%=level['id']%></div>
 
 <div>completions: <%=completions%></div>

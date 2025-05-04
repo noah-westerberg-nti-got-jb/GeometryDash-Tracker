@@ -28,4 +28,21 @@ class Collections
   def self.by_user(user_id)
     return db.execute('SELECT * FROM collections WHERE creator_id = ?', [user_id.to_i])
   end
+
+  def self.by_name_and_user_id(name, user_id)
+    return db.execute('SELECT * FROM collections WHERE name = ? AND creator_id = ?', [name, user_id.to_i]).first
+  end
+
+  def self.new(user_id, name, description)
+    db.execute('INSERT INTO collections (creator_id, name, description) VALUES (?, ?, ?)', [user_id.to_i, name, description])
+    return self.by_name_and_user_id(name, user_id)['id']
+  end
+
+  def self.add_level(collection_id, level_id)
+    db.execute('INSERT INTO collection_levels (collection_id, level_id) VALUES (?, ?)', [collection_id.to_i, level_id.to_i])
+  end
+
+  def self.delete(collection_id)
+    db.execute('DELETE FROM collections WHERE id = ?', [collection_id.to_i])
+  end
 end

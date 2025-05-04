@@ -2,17 +2,36 @@
 
 <h2>Collections</h2>
 
-<div id="search" style="display: none;">
-    <form method="get" action="/collections">
-        <input type="text" name="search" placeholder="Search" value="<%=params[:search]%>">
-    </form>
-</div>
+<script>const params = new URLSearchParams(window.location.search);</script>
+
+<%if session[:user]%>
+    <%user_id = nil unless user_id%>
+    <%if session[:user][:id].to_i == user_id.to_i%>
+        <form action="/users/<%=session[:user][:id]%>/collections/new" method="get">
+            <input type="hidden" name="level_id" id="level_id">
+            <button type="submit">New collection</button>
+        </form>
+
+        <script>
+            if (params.has('level_id')) {
+                document.getElementById('level_id').value = params.get('level_id');
+            }
+        </script>
+    <%end%>
+<%end%>
 
 <div id="container">
     <%collections.each do |collection|%>
         <a href="/collections/<%=collection['id']%>">
             <div class="level">
-                <div class="name"><%=collection['name']%></div> 
+                <div class="name"><%=collection['name']%>
+                    <span class="add-to-collection" style="display: none;">
+                        <form action="/collections/<%=collection['id']%>/add" method="post">
+                            <input type="hidden" name="level_id" class="level_id">
+                            <button type="submit">Add level</button>
+                        </form>
+                    </span>
+                </div> 
                 <div class="info">
                     <span><%=collection['description']%></span> 
                 </div>
@@ -20,3 +39,12 @@
         </a>
     <%end%>
 </div>
+
+<script>
+    if (params.has('level_id')) {
+        document.querySelectorAll('.add-to-collection').forEach(element => {
+            element.style.display = "inline";
+            element.querySelector('.level_id').value = params.get('level_id')
+        })
+    }
+</script>

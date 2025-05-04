@@ -1,7 +1,20 @@
 <script>add_css("/css/levels.css?<%=Time.now.to_i%>")</script>
 
 <%collection = collection_levels.first%>
+
+<%unless collection%>
+    <%redirect('/collections')%>
+<%end%>
+
 <h2><%=collection['collection_name']%></h2>
+
+<%if session[:user]%>
+    <%if session[:user][:id].to_i == collection['creator_id'].to_i%>
+        <form action="/collections/<%=collection['collection_id']%>/delete" method="post">
+            <button type="submit">Delete collection</button>
+        </form>
+    <%end%>
+<%end%>
 
 <p>Collection by: <a href="/users/<%=collection['creator_id']%>"><%=Users.user_by_id(collection['creator_id'])['username']%>#<%=collection['creator_id']%></a><p>
 
