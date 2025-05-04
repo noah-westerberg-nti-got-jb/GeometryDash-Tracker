@@ -26,8 +26,4 @@ App.namespace "/completions" do
 
     redirect("/users/#{user_id}")
   end
-
-  get "" do 
-    erb :"completions/index"
-  end
 end

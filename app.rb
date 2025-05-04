@@ -39,7 +39,7 @@ class App < Sinatra::Base
 
     get '/leaderboard' do
         users = Users.users_by_score
-        erb :leaderboard, :locals => {:users => users} 
+        erb :"leaderboard/index", :locals => {:users => users} 
     end
 end
 

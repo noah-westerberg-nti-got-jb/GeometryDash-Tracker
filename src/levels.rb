@@ -22,7 +22,7 @@ App.namespace "/levels" do
     level = Levels.level_by_id(level_id)
     completions = Completions.completions_of_level(level['id'])
     attempts = Completions.level_attempts(level['id'])
-    erb :"levels/index", :locals => {:level => level, :completions => completions, :attempts => attempts}
+    erb :"levels/show", :locals => {:level => level, :completions => completions, :attempts => attempts}
   end
 
   get '' do 
@@ -36,6 +36,6 @@ App.namespace "/levels" do
     levels = Levels.all if !levels || levels.empty?
     
 
-    erb :"levels/levels", :locals => {:levels => levels}
+    erb :"levels/index", :locals => {:levels => levels}
   end
 end
