@@ -136,7 +136,7 @@ App.namespace '/users' do
   end
 
   get '/:id/collections' do |id|
-    erb :"collections/index", :locals => {:collections => Collections.by_user(id), :user_id => id}
+    erb :"collections/index", :locals => {:collections => Collections.by_user(id)}
   end
 
   get '/:id/collections/new', :loggedIn => "/collections" do |id|

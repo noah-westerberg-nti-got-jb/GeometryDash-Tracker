@@ -39,6 +39,9 @@ class Collections
   end
 
   def self.add_level(collection_id, level_id)
+    unless db.execute('SELECT * FROM collection_levels WHERE collection_id = ? AND level_id = ?', [collection_id.to_i, level_id.to_i]).empty?
+      return
+    end
     db.execute('INSERT INTO collection_levels (collection_id, level_id) VALUES (?, ?)', [collection_id.to_i, level_id.to_i])
   end
 

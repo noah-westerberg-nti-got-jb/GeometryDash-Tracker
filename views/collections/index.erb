@@ -5,19 +5,15 @@
 <script>const params = new URLSearchParams(window.location.search);</script>
 
 <%if session[:user]%>
-    <%user_id = nil unless user_id%>
-    <%if session[:user][:id].to_i == user_id.to_i%>
-        <form action="/users/<%=session[:user][:id]%>/collections/new" method="get">
-            <input type="hidden" name="level_id" id="level_id">
-            <button type="submit">New collection</button>
-        </form>
-
-        <script>
-            if (params.has('level_id')) {
-                document.getElementById('level_id').value = params.get('level_id');
-            }
-        </script>
-    <%end%>
+    <form action="/users/<%=session[:user][:id]%>/collections/new" method="get">
+        <input type="hidden" name="level_id" id="level_id">
+        <button type="submit">New collection</button>
+    </form>
+    <script>
+        if (params.has('level_id')) {
+            document.getElementById('level_id').value = params.get('level_id');
+        }
+    </script>
 <%end%>
 
 <div id="container">
