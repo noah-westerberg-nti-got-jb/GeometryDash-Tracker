@@ -6,14 +6,11 @@
 
 <%if session[:user]%>
     <form action="/users/<%=session[:user][:id]%>/collections/new" method="get">
-        <input type="hidden" name="level_id" id="level_id">
+        <%if params['level_id']%>
+            <input type="hidden" name="level_id" value="<%=params['level_id']%>">
+        <%end%>
         <button type="submit">New collection</button>
     </form>
-    <script>
-        if (params.has('level_id')) {
-            document.getElementById('level_id').value = params.get('level_id');
-        }
-    </script>
 <%end%>
 
 <div id="container">
@@ -21,12 +18,13 @@
         <a href="/collections/<%=collection['id']%>">
             <div class="level">
                 <div class="name"><%=collection['name']%>
-                    <span class="add-to-collection" style="display: none;">
-                        <form action="/collections/<%=collection['id']%>/add" method="post">
-                            <input type="hidden" name="level_id" class="level_id">
-                            <button type="submit">Add level</button>
-                        </form>
-                    </span>
+                    <%if params['level_id']%>
+                        <span class="add-to-collection">
+                            <form action="/collections/<%=collection['id']%>/add/<%=params['level_id']%>" method="post">
+                                <button type="submit">Add level</button>
+                            </form>
+                        </span>
+                    <%end%>
                 </div> 
                 <div class="info">
                     <span><%=collection['description']%></span> 
@@ -35,12 +33,3 @@
         </a>
     <%end%>
 </div>
-
-<script>
-    if (params.has('level_id')) {
-        document.querySelectorAll('.add-to-collection').forEach(element => {
-            element.style.display = "inline";
-            element.querySelector('.level_id').value = params.get('level_id')
-        })
-    }
-</script>

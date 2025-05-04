@@ -11,13 +11,18 @@ App.namespace '/collections' do
 
   end 
 
-  post '/:id/delete' do |id|
+  post '/:id/delete', :loggedIn => "/collections" do |id|
     Collections.delete(id)
     redirect("/collections")
   end
 
-  post '/:id/add' do |id|
-    Collections.add_level(id, params['level_id'])
-    redirect("/collections/#{id}")
+  post '/:collection_id/add/:level_id', :loggedIn => "/collections" do |collection_id, level_id|
+    Collections.add_level(collection_id, level_id)
+    redirect("/collections/#{collection_id}")
+  end
+
+  post '/:collection_id/remove/:level_id', :loggedIn => "/collections" do |collection_id, level_id|
+    Collections.remove_level(collection_id, level_id)
+    redirect("/collections/#{collection_id}")
   end
 end

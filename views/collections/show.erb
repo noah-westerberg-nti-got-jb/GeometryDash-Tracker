@@ -24,7 +24,17 @@
     <%collection_levels.each do |level|%>
         <a href="/levels/<%=level['level_id']%>">
             <div class="level">
-                <div class="name"><%="#{level['level_name']}##{level['level_id']}"%></div> 
+                <div class="name"><%="#{level['level_name']}##{level['level_id']}"%>
+                    <%if session[:user]%>
+                        <%if session[:user][:id] == collection['creator_id']%>
+                            <span class="add-to-collection">
+                                <form action="/collections/<%=collection['collection_id']%>/remove/<%=level['level_id']%>" method="post">
+                                    <button type="submit">Remove from collection</button>
+                                </form>
+                            </span>
+                        <%end%>
+                    <%end%>
+                </div> 
                 <div class="info">
                     <span>Difficulty: <%=level['difficulty']%></span> 
                     <span>Length: <%=level['length_text']%></span> 

@@ -48,4 +48,8 @@ class Collections
   def self.delete(collection_id)
     db.execute('DELETE FROM collections WHERE id = ?', [collection_id.to_i])
   end
+
+  def self.remove_level(collection_id, level_id)
+    db.execute('DELETE FROM collection_levels WHERE collection_id = ? AND level_id = ?', [collection_id.to_i, level_id.to_i])
+  end
 end

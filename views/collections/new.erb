@@ -3,13 +3,8 @@
 <form action="/users/<%=session[:user][:id]%>/collections" method="post">
     <input type="text" name="name" placeholder="My collection" required>
     <input type="text" name="description" placeholder="Description">
-    <input type="hidden" name="level_id" id="level_id">
+    <%if params['level_id']%>
+        <input type="hidden" name="level_id" value="<%=params['level_id']%>">
+    <%end%>
     <button type="submit">Create</button>
 </form>
-
-<script>
-    const params = new URLSearchParams(window.location.search);
-    if (params.has('level_id')) {
-        document.getElementById('level_id').value = params.get('level_id');
-    }
-</script>
