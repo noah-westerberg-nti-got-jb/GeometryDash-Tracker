@@ -47,8 +47,6 @@ class Seeder
 					id INTEGER PRIMARY KEY AUTOINCREMENT,
 					user_id INTEGER NOT NULL,
 					title TEXT NOT NULL DEFAULT "New Activity",
-					text TEXT,
-					attachment_id INTEGER,
 					created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 					FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE SET NULL)'
 					)
