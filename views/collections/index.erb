@@ -1,0 +1,35 @@
+<script>add_css("/css/levels.css?<%=Time.now.to_i%>")</script>
+
+<h2>Collections</h2>
+
+<script>const params = new URLSearchParams(window.location.search);</script>
+
+<%if session[:user]%>
+    <form action="/collections/new" method="get">
+        <%if params['level_id']%>
+            <input type="hidden" name="level_id" value="<%=params['level_id']%>">
+        <%end%>
+        <button type="submit">New collection</button>
+    </form>
+<%end%>
+
+<div id="container">
+    <%collections.each do |collection|%>
+        <a href="/collections/<%=collection['id']%>">
+            <div class="level">
+                <div class="name"><%=collection['name']%>
+                    <%if params['level_id']%>
+                        <span class="add-to-collection">
+                            <form action="/collections/<%=collection['id']%>/add/<%=params['level_id']%>" method="post">
+                                <button type="submit">Add level</button>
+                            </form>
+                        </span>
+                    <%end%>
+                </div> 
+                <div class="info">
+                    <span><%=collection['description']%></span> 
+                </div>
+            </div>
+        </a>
+    <%end%>
+</div>

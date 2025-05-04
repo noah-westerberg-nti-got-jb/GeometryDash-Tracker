@@ -1,0 +1,20 @@
+<script>add_css("/css/profile.css?<%=Time.now.to_i%>")</script>
+
+<div id="user-display">
+    <%profile_button = " "%>
+    <%if session[:user]%>
+        <%if session[:user][:id].to_i == user['id'].to_i%>
+            <%profile_button = "<form action=\"/users/" + user['id'].to_s + "/edit\" method=\"get\"> <button type=\"submit\">Edit</button></form>"%>
+        <%elsif !FollowList.is_following?(session[:user][:id], user['id'])%>
+            <%profile_button += "<form action=\"/users/" + user['id'].to_s + "/follow\" method=\"post\"> <button type=\"submit\">Follow</button></form>"%>
+        <%else%>
+            <%profile_button += "<form action=\"/users/" + user['id'].to_s + "/unfollow\" method=\"post\"> <button type=\"submit\">Unfollow</button></form>"%>
+        <%end%>
+    <%end%>
+    
+    <%=display_user_panel(user['id'], profile_button, "completions: #{completions}<br><br>score: #{user['score']}<br><br> <a href=\"/users/#{user['id']}/followers\">followers: #{follower_count}</a> <br><a href=\"/users/#{user['id']}/following\">following: #{following_count}</a><br><br> <a href=\"/users/#{user['id']}/collections\">collections</a>")%>
+</div>
+
+<div id="user-feed">
+    <%=display_activity_feed([user['id']])%>
+</div>

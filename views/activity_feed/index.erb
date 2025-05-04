@@ -5,8 +5,8 @@
         <%=display_user_panel(activity['user_id'], activity['time'], activity['content'])%>
         <div class="activity-feed-split"><span>.</span><span>.</span><span>.</span></div>
     <%end%>
-<%elsif session[:user]%>
-    Try adding a <strong><a>completion</a></strong> or start <strong><a>following someone</a></strong> for things to start showing up here
-<%else%>
+<%elsif !session[:user]%>
     <a href="/users/login">Log in</a>, or <a href="/users/new">create an account</a>, to see your activity feed  
+<%else%>
+    Theere are no activities to be shown
 <%end%>

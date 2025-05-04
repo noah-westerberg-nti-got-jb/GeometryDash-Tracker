@@ -1,6 +1,9 @@
 require_relative 'models/Completions'
 require_relative 'models/Users'
 require_relative 'models/FollowList'
+require_relative 'models/ActivityFeed'
+require_relative 'models/Levels'
+require_relative 'models/Collections'
 
 class App < Sinatra::Base
     configure do
@@ -30,13 +33,17 @@ class App < Sinatra::Base
         return false
     end
 
+    # @route GET /
+    # @return [String] HTML-sida som visar startsidan med aktivitetsflöde
     get '/' do
         erb :index
     end 
 
+    # @route GET /leaderboard
+    # @return [String] HTML-sida som visar topplistan sorterad efter poäng
     get '/leaderboard' do
         users = Users.users_by_score
-        erb :leaderboard, :locals => {:users => users} 
+        erb :"leaderboard/index", :locals => {:users => users} 
     end
 end
 
@@ -46,3 +53,4 @@ require_relative 'src/activity_feed'
 require_relative 'src/user_panel'
 require_relative 'src/levels'
 require_relative 'src/completions'
+require_relative 'src/collections'

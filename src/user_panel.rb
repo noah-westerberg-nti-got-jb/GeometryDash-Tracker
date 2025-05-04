@@ -4,6 +4,6 @@ class App
     if (user.nil?)
       return
     end
-    return erb :'user_panel', :locals => {:user => user, :info => info, :content => content}
+    return erb :'utils/user_panel', :locals => {:user => user, :info => info, :content => content}
   end
 end

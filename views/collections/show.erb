@@ -1,0 +1,46 @@
+<script>add_css("/css/levels.css?<%=Time.now.to_i%>")</script>
+
+<%collection = collection_levels.first%>
+
+<%unless collection%>
+    <%redirect('/collections')%>
+<%end%>
+
+<h2><%=collection['collection_name']%></h2>
+
+<%if session[:user]%>
+    <%if session[:user][:id].to_i == collection['creator_id'].to_i%>
+        <form action="/collections/<%=collection['collection_id']%>/delete" method="post">
+            <button type="submit">Delete collection</button>
+        </form>
+    <%end%>
+<%end%>
+
+<p>Collection by: <a href="/users/<%=collection['creator_id']%>"><%=Users.user_by_id(collection['creator_id'])['username']%>#<%=collection['creator_id']%></a><p>
+
+<p><%=collection['collection_description']%></p>
+
+<div id="container">
+    <%collection_levels.each do |level|%>
+        <a href="/levels/<%=level['level_id']%>">
+            <div class="level">
+                <div class="name"><%="#{level['level_name']}##{level['level_id']}"%>
+                    <%if session[:user]%>
+                        <%if session[:user][:id] == collection['creator_id']%>
+                            <span class="add-to-collection">
+                                <form action="/collections/<%=collection['collection_id']%>/remove/<%=level['level_id']%>" method="post">
+                                    <button type="submit">Remove from collection</button>
+                                </form>
+                            </span>
+                        <%end%>
+                    <%end%>
+                </div> 
+                <div class="info">
+                    <span>Difficulty: <%=level['difficulty']%></span> 
+                    <span>Length: <%=level['length_text']%></span> 
+                    <span>Completions: <%=Completions.completions_of_level(level['level_id'])%></span>
+                </div>
+            </div>
+        </a>
+    <%end%>
+</div>

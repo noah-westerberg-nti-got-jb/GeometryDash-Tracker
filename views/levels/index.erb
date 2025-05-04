@@ -1,7 +1,24 @@
-<h2><%=level['name']%><h2>
+<script>add_css("/css/levels.css?<%=Time.now.to_i%>")</script>
 
-id:<%=level['ingame_id']%>
+<h2>Levels</h2>
 
-completions: <%=completions%>
+<div id="search">
+    <form method="get" action="/levels">
+        <input type="text" name="search" placeholder="Search" value="<%=params[:search]%>">
+    </form>
+</div>
 
-attempts: <%=attempts%>
+<div id="container">
+    <%levels.each do |level|%>
+        <a href="/levels/<%=level['id']%>">
+            <div class="level">
+                <div class="name"><%="#{level['name']}##{level['id']}"%></div> 
+                <div class="info">
+                    <span>Difficulty: <%=level['difficulty']%></span> 
+                    <span>Length: <%=level['length_text']%></span> 
+                    <span>Completions: <%=Completions.completions_of_level(level['id'])%></span>
+                </div>
+            </div>
+        </a>
+    <%end%>
+</div>
