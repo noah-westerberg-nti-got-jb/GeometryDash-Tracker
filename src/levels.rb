@@ -22,7 +22,8 @@ App.namespace "/levels" do
     level = Levels.level_by_id(level_id)
     completions = Completions.completions_of_level(level['id'])
     attempts = Completions.level_attempts(level['id'])
-    erb :"levels/show", :locals => {:level => level, :completions => completions, :attempts => attempts}
+    collections = Collections.by_level_id(level['id'])
+    erb :"levels/show", :locals => {:level => level, :completions => completions, :attempts => attempts, :collections => collections}
   end
 
   get '' do 

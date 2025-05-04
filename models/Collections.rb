@@ -14,7 +14,7 @@ class Collections
   end
 
   def self.by_level_id(level_id)
-    return db.exectue('SELECT collections.* FROM collections JOIN collection_levels ON collections.id = collection_levels.collection_id JOIN levels ON collection_levels.level_id = levels.id WHERE level_id = ?', [level_id.to_i])
+    return db.execute('SELECT collections.* FROM collections JOIN collection_levels ON collections.id = collection_levels.collection_id JOIN levels ON collection_levels.level_id = levels.id WHERE collection_levels.level_id = ?', [level_id.to_i])
   end
 
   def self.by_id_with_levels(id)
