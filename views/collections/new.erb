@@ -1,6 +1,6 @@
 <h2>Create a new collection</h2>
 
-<form action="/users/<%=session[:user][:id]%>/collections" method="post">
+<form action="/collections" method="post">
     <input type="text" name="name" placeholder="My collection" required>
     <input type="text" name="description" placeholder="Description">
     <%if params['level_id']%>

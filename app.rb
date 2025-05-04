@@ -33,10 +33,14 @@ class App < Sinatra::Base
         return false
     end
 
+    # @route GET /
+    # @return [String] HTML-sida som visar startsidan med aktivitetsflöde
     get '/' do
         erb :index
     end 
 
+    # @route GET /leaderboard
+    # @return [String] HTML-sida som visar topplistan sorterad efter poäng
     get '/leaderboard' do
         users = Users.users_by_score
         erb :"leaderboard/index", :locals => {:users => users} 

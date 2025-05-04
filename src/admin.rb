@@ -10,10 +10,16 @@ App.set(:isAdmin) do |redirect|
 end
 
 App.namespace '/admin', :isAdmin => '/users/login' do
+  # @route GET /admin
+  # @condition :isAdmin Användaren måste vara admin
+  # @return [Redirect] Omdirigerar till databashanteraren
   get '' do 
       redirect('/admin/database')
   end
 
+  # @route GET /admin/database
+  # @condition :isAdmin Användaren måste vara admin
+  # @return [String] HTML-sida med databashanteraren
   get '/database' do
     @hide_header = true
     erb :'admin/database'
@@ -27,6 +33,10 @@ App.namespace '/admin', :isAdmin => '/users/login' do
       return output
   end
 
+  # @route GET /admin/database-output/*
+  # @param [String] query_list SQL-frågor separerade med semikolon
+  # @condition :isAdmin Användaren måste vara admin
+  # @return [String] Formaterat resultat av SQL-frågorna
   get '/database-output/*' do |query_list|
       output = ""
 
@@ -49,6 +59,9 @@ App.namespace '/admin', :isAdmin => '/users/login' do
       return output
   end
   
+  # @route GET /admin/view-users
+  # @condition :isAdmin Användaren måste vara admin
+  # @return [String] Formaterad lista över alla användare
   get '/view-users' do
     @hide_header = true
     format_db_data(Users.all_users)

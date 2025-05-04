@@ -5,7 +5,7 @@
 <script>const params = new URLSearchParams(window.location.search);</script>
 
 <%if session[:user]%>
-    <form action="/users/<%=session[:user][:id]%>/collections/new" method="get">
+    <form action="/collections/new" method="get">
         <%if params['level_id']%>
             <input type="hidden" name="level_id" value="<%=params['level_id']%>">
         <%end%>

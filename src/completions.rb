@@ -3,10 +3,21 @@ require_relative '../models/Levels'
 require 'json'
 
 App.namespace "/completions" do 
+  # @route GET /completions/new
+  # @condition :loggedIn Användaren måste vara inloggad
+  # @return [String] HTML-formulär för att registrera en ny completion
   get "/new", :loggedIn => "/" do
     erb :"completions/new"
   end
 
+  # @route POST /completions
+  # @param [Integer] level_id ID för leveln som slutförts
+  # @param [Float] percentage Hur stor del av leveln som klarats av (0-100)
+  # @param [Integer] attempts Antal försök som gjorts
+  # @param [Integer] perceived_difficulty Upplevd svårighetsgrad (-3 till 3)
+  # @condition :loggedIn Användaren måste vara inloggad
+  # @return [Redirect] Omdirigerar till användarens profilsida
+  # @return [Redirect] Omdirigerar till formulär för att skapa ny level om leveln inte finns
   post "", :loggedIn => "/" do
     level_id = params[:level_id]
 
