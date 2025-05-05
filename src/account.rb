@@ -181,7 +181,7 @@ App.namespace '/users' do
   # @return [String] HTML-sida som visar alla användare som följer den angivna användaren
   get '/:id/followers' do |id|
     user = Users.user_by_id(id)
-    erb :"account/follow_list", :locals => {:users => FollowList.get_followers(id), :title => "Users following <em>#{user['username']}##{user['id']}</em>"}
+    erb :"account/follow_list", :locals => {:users => FollowList.get_followers(id), :title => "Users following <a href=\\\"/users/#{id}\\\"><em>#{user['username']}##{user['id']}</em></a>"}
   end
 
   # @route GET /users/:id/following
@@ -189,7 +189,7 @@ App.namespace '/users' do
   # @return [String] HTML-sida som visar alla användare som den angivna användaren följer
   get '/:id/following' do |id|
     user = Users.user_by_id(id)
-    erb :"account/follow_list", :locals => {:users => FollowList.get_following(id), :title => "Users <em>#{user['username']}##{user['id']}</em> is following"}
+    erb :"account/follow_list", :locals => {:users => FollowList.get_following(id), :title => "Users <a href=\\\"/users/#{id}\\\"><em>#{user['username']}##{user['id']}</em></a> is following"}
   end
 
   # @route GET /users/:id/collections 

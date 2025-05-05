@@ -5,7 +5,7 @@ class Seeder
 
   def self.seed!
 	drop_tables
-    create_tables
+  	create_tables
   end
 
   def self.drop_tables
@@ -100,5 +100,32 @@ class Seeder
     @db = SQLite3::Database.new 'db/GDTracker.sqlite'
     @db.results_as_hash = true
     return @db
+  end
+
+  def self.test_data!
+	self.seed!
+
+	db.execute('INSERT INTO users (username, password, score) VALUES ("test_user_1", ?, 3)', [BCrypt::Password.create("test_password1")])
+	db.execute('INSERT INTO users (username, password, score) VALUES ("test_user_2", ?, 10)', [BCrypt::Password.create("test_password2")])
+	db.execute('INSERT INTO users (username, password, score) VALUES ("test_user_3", ?, 2)', [BCrypt::Password.create("test_password3")])
+
+	db.execute('INSERT INTO levels (id, name, difficulty, length_text) VALUES (1, "Level 1", "easy", "short")')
+	db.execute('INSERT INTO levels (id, name, difficulty, length_text) VALUES (2, "Level 2", "medium", "medium")')
+	db.execute('INSERT INTO levels (id, name, difficulty, length_text) VALUES (3, "Level 3", "hard", "long")')
+
+	db.execute('INSERT INTO collections (creator_id, name, description) VALUES (1, "Collection 1", "Description 1")')
+	db.execute('INSERT INTO collection_levels (collection_id, level_id) VALUES (1, 1)')
+	db.execute('INSERT INTO collection_levels (collection_id, level_id) VALUES (1, 3)')
+
+	db.execute('INSERT INTO collections (creator_id, name, description) VALUES (2, "Awsome levels", "The best levels")')
+	db.execute('INSERT INTO collection_levels (collection_id, level_id) VALUES (2, 1)')
+	db.execute('INSERT INTO collection_levels (collection_id, level_id) VALUES (2, 2)')
+	db.execute('INSERT INTO collection_levels (collection_id, level_id) VALUES (2, 3)')
+
+	db.execute('INSERT INTO follow_list (follower, recipient) VALUES (2, 3)')
+	db.execute('INSERT INTO follow_list (follower, recipient) VALUES (2, 3)')
+	db.execute('INSERT INTO follow_list (follower, recipient) VALUES (3, 4)')
+	db.execute('INSERT INTO follow_list (follower, recipient) VALUES (4, 2)')
+	db.execute('INSERT INTO follow_list (follower, recipient) VALUES (2, 4)')
   end
 end
