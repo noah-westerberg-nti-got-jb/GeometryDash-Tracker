@@ -1,0 +1,25 @@
+{
+  "name": "geometrydash-tracker",
+  "version": "1.0.0",
+  "description": "Enskillt slutprojekt under hela vårterminen 2025 i kursen Webbserverprogrammering 1 på NTI Johanneberg.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noah-westerberg-nti-got-jb/GeometryDash-Tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/noah-westerberg-nti-got-jb/GeometryDash-Tracker/issues"
+  },
+  "homepage": "https://github.com/noah-westerberg-nti-got-jb/GeometryDash-Tracker#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "@types/node": "^22.15.3"
+  }
+}

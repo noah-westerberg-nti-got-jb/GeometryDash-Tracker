@@ -10,8 +10,10 @@ App.namespace '/collections' do
   # @return [Redirect] Omdirigerar till den nya samlingens sida
   post '', :loggedIn => "/collections"  do
     collection_id = Collections.new(session[:user][:id], params['name'], params['description'])
-    if params['level_id'] != ""
-      Collections.add_level(collection_id, params['level_id'])
+    if params['level_id']
+      if params['level_id'] != ""
+        Collections.add_level(collection_id, params['level_id'])
+      end
     end
     redirect("/collections/#{collection_id}")
   end
@@ -20,6 +22,14 @@ App.namespace '/collections' do
   # @return [String] HTML-sida som visar alla samlingar
   get '' do 
     erb :"collections/index", :locals => {:collections => Collections.all}
+  end
+
+  # @route GET /collections/new
+  # @condition :loggedIn Användaren måste vara inloggad
+  # @return [String] HTML-formulär för att skapa ny samling
+  get '/new', :loggedIn => "/collections" do
+    p "aaaa"
+    erb :"collections/new"
   end
 
   # @route GET /collections/:id
@@ -56,13 +66,5 @@ App.namespace '/collections' do
   post '/:collection_id/remove/:level_id', :loggedIn => "/collections" do |collection_id, level_id|
     Collections.remove_level(collection_id, level_id)
     redirect("/collections/#{collection_id}")
-  end
-
-  # @route GET /collections/:id/collections/new
-  # @param [Integer] id Användar-ID
-  # @condition :loggedIn Användaren måste vara inloggad
-  # @return [String] HTML-formulär för att skapa ny samling
-  get '/:id/collections/new', :loggedIn => "/collections" do
-    erb :"collections/new"
   end
 end

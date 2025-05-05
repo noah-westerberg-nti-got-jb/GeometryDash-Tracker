@@ -48,7 +48,6 @@ App.namespace "/levels" do
       level_by_id = Levels.level_by_id(params[:search])
       level_by_name = Levels.level_by_name(params[:search])
       levels = [level_by_id, level_by_name].compact
-      p levels
     end
 
     levels = Levels.all if !levels || levels.empty?

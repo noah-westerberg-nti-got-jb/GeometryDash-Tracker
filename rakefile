@@ -13,7 +13,7 @@ task :"test-data" do
 end
 
 task :dev do
-    sh 'bundle exec rerun --ignore "*.{erb,js,css}" --force-polling "rackup --host 0.0.0.0"'
+    sh 'bundle exec rerun --ignore "*.{erb,js,css,ts}" --ignore "test-results/*" --ignore "playwright-report/*" --ignore "tests/*" --ignore "e2e/*" --force-polling "rackup --host 0.0.0.0"'
 end
 
 task :run do
