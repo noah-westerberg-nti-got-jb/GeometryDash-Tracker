@@ -32,11 +32,20 @@ App.namespace '/collections' do
     erb :"collections/new"
   end
 
+  # @route GET /collections/:id/edit
+  # @param [Integer] id ID för samlingen som ska redigeras
+  # @condition :loggedIn Användaren måste vara inloggad
+  # @return [String] HTML-formulär för att redigera samling
+  get '/:id/edit', :loggedIn => "/collections" do |id|
+    collection = Collections.by_id(id)
+    erb :"collections/edit", :locals => {:collection => collection}
+  end
+
   # @route GET /collections/:id
   # @param [Integer] id Samlingens ID
   # @return [String] HTML-sida som visar samlingens innehåll
   get '/:id' do |id|
-    erb :"collections/show", :locals => {:collection_levels =>  Collections.by_id_with_levels(id)}
+    erb :"collections/show", :locals => {:collection_levels =>  Collections.by_id_with_levels(id), :collection => Collections.by_id(id)}
   end 
 
   # @route POST /collections/:id/delete
@@ -66,5 +75,16 @@ App.namespace '/collections' do
   post '/:collection_id/remove/:level_id', :loggedIn => "/collections" do |collection_id, level_id|
     Collections.remove_level(collection_id, level_id)
     redirect("/collections/#{collection_id}")
+  end
+
+  # @route POST /collections/:id/update
+  # @param [Integer] id ID för samlingen som ska uppdateras
+  # @param [String] name Nytt namn på samlingen
+  # @param [String] description Ny beskrivning av samlingen
+  # @condition :loggedIn Användaren måste vara inloggad
+  # @return [Redirect] Omdirigerar till den uppdaterade samlingens sida
+  post '/:id/update', :loggedIn => "/collections/" do |id|
+    Collections.update(id, params['name'], params['description'])
+    redirect("/collections/#{id}")
   end
 end

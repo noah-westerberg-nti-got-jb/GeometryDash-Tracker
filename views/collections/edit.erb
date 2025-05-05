@@ -1,0 +1,11 @@
+<%p collection%>
+
+<h2>Update collection: <%=collection['name']%></h2>
+
+<form action="/collections/<%=collection['id']%>/update" method="post">
+
+<p>Name: <input type="text" placeholder="New name..." value="<%=collection['name']%>" name="name" required></p>
+<p>Description: <input type="text" placeholder="New description..." value="<%=collection['description']%>" name="description"></p>
+
+<button type="submit">Save Changes</button>
+</form>

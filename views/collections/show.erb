@@ -1,16 +1,13 @@
 <script>add_css("/css/levels.css?<%=Time.now.to_i%>")</script>
 
-<%collection = collection_levels.first%>
-
-<%unless collection%>
-    <%redirect('/collections')%>
-<%end%>
-
-<h2><%=collection['collection_name']%></h2>
+<h2><%=collection['name']%></h2>
 
 <%if session[:user]%>
     <%if session[:user][:id].to_i == collection['creator_id'].to_i%>
-        <form action="/collections/<%=collection['collection_id']%>/delete" method="post">
+        <form action="/collections/<%=collection['id']%>/edit" method="get">
+            <button type="submit">Edit</button>
+        </form>
+        <form action="/collections/<%=collection['id']%>/delete" method="post">
             <button type="submit">Delete collection</button>
         </form>
     <%end%>
@@ -18,7 +15,7 @@
 
 <p>Collection by: <a href="/users/<%=collection['creator_id']%>"><%=Users.user_by_id(collection['creator_id'])['username']%>#<%=collection['creator_id']%></a><p>
 
-<p><%=collection['collection_description']%></p>
+<p><%=collection['description']%></p>
 
 <div id="container">
     <%collection_levels.each do |level|%>

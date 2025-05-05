@@ -22,7 +22,7 @@ class Collections
   end
 
   def self.by_id(id)
-    return db.execute('SELECT * FROM collections WHERE id = ?', [id.to_i])
+    return db.execute('SELECT * FROM collections WHERE id = ?', [id.to_i]).first
   end
 
   def self.by_user(user_id)
@@ -51,5 +51,9 @@ class Collections
 
   def self.remove_level(collection_id, level_id)
     db.execute('DELETE FROM collection_levels WHERE collection_id = ? AND level_id = ?', [collection_id.to_i, level_id.to_i])
+  end
+
+  def self.update(collection_id, name, description)
+    db.execute('UPDATE collections SET name = ?, description = ? WHERE id = ?', [name, description, collection_id.to_i])
   end
 end
