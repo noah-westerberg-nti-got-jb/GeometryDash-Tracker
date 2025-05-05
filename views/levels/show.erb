@@ -21,19 +21,21 @@
  | <%=level['length_seconds']%>s
 <%end%></div>
 
-<script>add_css("/css/levels.css?<%=Time.now.to_i%>")</script>
+<%unless collections.empty?%>
+    <script>add_css("/css/levels.css?<%=Time.now.to_i%>")</script>
 
-<h3>Collections featuring <em><%=level['name']%>#<%=level['id']%></em>:</h3>
+    <h3>Collections featuring <em><%=level['name']%>#<%=level['id']%></em>:</h3>
 
-<div id="container">
-    <%collections.each do |collection|%>
-        <a href="/collections/<%=collection['id']%>">
-            <div class="level">
-                <div class="name"><%=collection['name']%></div> 
-                <div class="info">
-                    <span>Creator: <%=Users.user_by_id(collection['creator_id'])['username']%></span> 
+    <div id="container">
+        <%collections.each do |collection|%>
+            <a href="/collections/<%=collection['id']%>">
+                <div class="level">
+                    <div class="name"><%=collection['name']%></div> 
+                    <div class="info">
+                        <span>Creator: <%=Users.user_by_id(collection['creator_id'])['username']%></span> 
+                    </div>
                 </div>
-            </div>
-        </a>
-    <%end%>
-</div>
+            </a>
+        <%end%>
+    </div>
+<%end%>
